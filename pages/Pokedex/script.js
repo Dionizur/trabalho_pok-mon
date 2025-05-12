@@ -14,6 +14,40 @@ document.addEventListener('DOMContentLoaded', function() {
     let totalPokemons = 0;
     let allPokemons = [];
     let filteredPokemons = [];
+
+    // Mapeamento dos tipos em inglês para português
+    const tiposPT = {
+        normal: 'Normal',
+        fighting: 'Lutador',
+        flying: 'Voador',
+        poison: 'Veneno',
+        ground: 'Terrestre',
+        rock: 'Pedra',
+        bug: 'Inseto',
+        ghost: 'Fantasma',
+        steel: 'Aço',
+        fire: 'Fogo',
+        water: 'Água',
+        grass: 'Grama',
+        electric: 'Elétrico',
+        psychic: 'Psíquico',
+        ice: 'Gelo',
+        dragon: 'Dragão',
+        dark: 'Noturno',
+        fairy: 'Fada',
+        unknown: 'Desconhecido',
+        shadow: 'Sombra'
+    };
+
+    // Mapeamento dos status em inglês para português
+    const statusPT = {
+        hp: 'HP',
+        attack: 'Ataque',
+        defense: 'Defesa',
+        'special-attack': 'Ataque Especial',
+        'special-defense': 'Defesa Especial',
+        speed: 'Velocidade'
+    };
     
     // Carrega todos os Pokémon uma vez
     fetchAllPokemons();
@@ -68,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             filteredPokemons = [...allPokemons];
             loadPokemons();
         } catch (error) {
-            console.error('Error fetching Pokémon list:', error);
+            console.error('Erro ao buscar a lista de Pokémon:', error);
         }
     }
     
@@ -96,32 +130,35 @@ document.addEventListener('DOMContentLoaded', function() {
         loadPokemons();
     }
     
-    
     // Função para carregar os Pokémon da página atual
-    function loadPokemons() {
+    async function loadPokemons() {
         const startIndex = (currentPage - 1) * pokemonsPerPage;
         const endIndex = startIndex + pokemonsPerPage;
         const pokemonsToShow = filteredPokemons.slice(startIndex, endIndex);
         
         pokedex.innerHTML = '';
         
-        pokemonsToShow.forEach(pokemon => {
-            const pokemonId = pokemon.url.split('/')[6];
-            fetchPokemonData(pokemonId);
-        });
+        try {
+            // Busca os dados de todos os Pokémon da página atual em paralelo
+            const pokemonDataArray = await Promise.all(
+                pokemonsToShow.map(pokemon => {
+                    const pokemonId = pokemon.url.split('/')[6];
+                    return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then(res => res.json());
+                })
+            );
+            
+            // Ordena os dados pelo ID do Pokémon
+            pokemonDataArray.sort((a, b) => a.id - b.id);
+            
+            // Exibe os cards na ordem correta
+            pokemonDataArray.forEach(pokemon => {
+                displayPokemonCard(pokemon);
+            });
+        } catch (error) {
+            console.error('Erro ao buscar dados dos Pokémon:', error);
+        }
         
         updatePagination();
-    }
-    
-    // Função para buscar dados de um Pokémon específico
-    async function fetchPokemonData(id) {
-        try {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-            const data = await response.json();
-            displayPokemonCard(data);
-        } catch (error) {
-            console.error(`Error fetching Pokémon ${id}:`, error);
-        }
     }
     
     // Função para exibir o card do Pokémon
@@ -149,7 +186,8 @@ document.addEventListener('DOMContentLoaded', function() {
         pokemon.types.forEach(type => {
             const typeSpan = document.createElement('span');
             typeSpan.className = `type ${type.type.name}`;
-            typeSpan.textContent = type.type.name;
+            // Traduz o tipo para português
+            typeSpan.textContent = tiposPT[type.type.name] || type.type.name;
             pokemonTypes.appendChild(typeSpan);
         });
         
@@ -184,7 +222,8 @@ document.addEventListener('DOMContentLoaded', function() {
         pokemon.types.forEach(type => {
             const typeSpan = document.createElement('span');
             typeSpan.className = `type ${type.type.name}`;
-            typeSpan.textContent = type.type.name;
+            // Traduz o tipo para português
+            typeSpan.textContent = tiposPT[type.type.name] || type.type.name;
             pokemonTypes.appendChild(typeSpan);
         });
         
@@ -197,7 +236,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const statName = document.createElement('div');
             statName.className = 'stat-name';
-            statName.textContent = stat.stat.name.replace('-', ' ');
+            // Traduz o nome do status para português
+            statName.textContent = statusPT[stat.stat.name] || stat.stat.name.replace('-', ' ');
             
             const statBarContainer = document.createElement('div');
             statBarContainer.className = 'stat-bar-container';
@@ -220,34 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
         modalBody.appendChild(pokemonId);
         modalBody.appendChild(pokemonName);
         modalBody.appendChild(pokemonImg);
-        modalBody.appendChild(pokemonTypes);
-        modalBody.appendChild(statsContainer);
-        
         pokemonModal.style.display = 'block';
-    }
-    
-    // Função para buscar Pokémon
-    function searchPokemon() {
-        const searchTerm = searchInput.value.toLowerCase().trim();
-        
-        if (searchTerm === '') {
-            filteredPokemons = [...allPokemons];
-        } else {
-            filteredPokemons = allPokemons.filter(pokemon => 
-                pokemon.name.includes(searchTerm) || 
-                pokemon.url.split('/')[6].includes(searchTerm)
-            );
-            
-            // Mantém a ordenação mesmo após busca
-            filteredPokemons.sort((a, b) => {
-                const idA = parseInt(a.url.split('/')[6]);
-                const idB = parseInt(b.url.split('/')[6]);
-                return idA - idB;
-            });
-        }
-        
-        currentPage = 1;
-        loadPokemons();
     }
     
     // Função para atualizar a paginação
