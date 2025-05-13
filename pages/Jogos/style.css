@@ -16,6 +16,7 @@ header {
   background-color: #e60012; /* Vermelho Pokémon */
   color: white;
   padding: 20px;
+  align-items: center;
 }
 
 .header-content {
@@ -25,8 +26,8 @@ header {
 }
 
 .pokeball-img {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }
 
 /* Lista de jogos */
@@ -73,4 +74,84 @@ footer {
   color: white;
   text-align: center;
   padding: 10px;
+}
+/* From Uiverse.io by faxriddin20 */ 
+.button-container {
+  display: flex;
+  background-color: black;
+  width: 330px;
+  height: 40px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+}
+
+.button {
+  outline: 0 !important;
+  border: 0 !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+}
+
+.icon {
+  font-size: 20px;
+}
+.logo {
+  font-size: 2px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.logo-img {
+  height: 1px;
+  width: auto;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+  animation: pulse 2s infinite;
+}
+
+header .logo img {
+  width: 150px; 
+  height: auto; 
+}
+
+
+.nav-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #e53935;
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0;
+  z-index: 1000;
+}
+
+.nav-footer a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-icon {
+  width: auto;
+  height: 35px;
+  margin-right: 8px;
+  vertical-align: middle;
 }
