@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
       releaseDate: '27 de fevereiro de 1996',
       description: 'Os primeiros jogos da franquia, lançados para o Game Boy, introduziram os 151 Pokémon originais e o conceito de captura, treinamento e batalhas.',
       additionalInfo: 'Pokémon Red & Blue revolucionaram o mundo dos videogames, introduzindo a mecânica de trocas entre jogadores e batalhas em turnos. Esses jogos também introduziram as características de captura e o conceito de "Pokédex", que é uma enciclopédia de Pokémon.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/en/0/0d/PokemonRedBox.jpg'
+       imageUrl: './assets/img/pokemonredblue.jpg'
     },
     {
       title: 'Pokémon Gold & Silver',
@@ -39,18 +39,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const gamesList = document.getElementById('games-list');
 
-  games.forEach(game => {
-    const gameCard = document.createElement('div');
-    gameCard.classList.add('game-card');
-    gameCard.innerHTML = `
-      <img src="${game.imageUrl}" alt="${game.title}">
-      <div class="content">
-        <h3>${game.title}</h3>
-        <p><strong>Lançamento:</strong> ${game.releaseDate}</p>
-        <p><strong>Descrição:</strong> ${game.description}</p>
-        <p><strong>Informações adicionais:</strong> ${game.additionalInfo}</p>
-      </div>
-    `;
-    gamesList.appendChild(gameCard);
+games.forEach(game => {
+  const gameCard = document.createElement('div');
+  gameCard.classList.add('game-card');
+
+  gameCard.innerHTML = `
+    <h2>${game.title}</h2>
+    <img src="${game.imageUrl}" alt="${game.title}" class="game-img" />
+    <p><strong>Data de Lançamento:</strong> ${game.releaseDate}</p>
+    <p>${game.description}</p>
+    <button class="toggle-info">Informações adicionais</button>
+    <p class="additional-info" style="display: none;">${game.additionalInfo}</p>
+  `;
+
+  // Adiciona o comportamento do botão
+  gameCard.querySelector('.toggle-info').addEventListener('click', () => {
+    const info = gameCard.querySelector('.additional-info');
+    info.style.display = info.style.display === 'none' ? 'block' : 'none';
   });
+
+  gamesList.appendChild(gameCard);
+});
+
 });

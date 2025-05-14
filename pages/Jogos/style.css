@@ -116,14 +116,14 @@ footer {
 }
 
 .logo-img {
-  height: 1px;
+  height: 0.5px;
   width: auto;
   filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
   animation: pulse 2s infinite;
 }
 
 header .logo img {
-  width: 150px; 
+  width: 100px; 
   height: auto; 
 }
 
@@ -154,4 +154,37 @@ header .logo img {
   height: 35px;
   margin-right: 8px;
   vertical-align: middle;
+}
+.game-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.game-img {
+  width: 60%; /* ou outro valor menor */
+  max-width: 300px;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+button.toggle-info {
+  background-color: #ef5350;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button.toggle-info:hover {
+  background-color: #d32f2f;
+}
+
+.additional-info {
+  margin-top: 0.5rem;
+  color: #333;
 }
