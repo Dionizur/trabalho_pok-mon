@@ -9,13 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalBody = document.getElementById('modal-body');
     const closeModal = document.querySelector('.close-modal');
     
+    
     let currentPage = 1;
     const pokemonsPerPage = 50;
     let totalPokemons = 0;
     let allPokemons = [];
     let filteredPokemons = [];
-
-    // Mapeamento dos tipos em inglês para português
+    let allPokemonData = []; // armazenar dados completos incluindo geração
+    let selectedGeneration = 'all';
+    
     const tiposPT = {
         normal: 'Normal',
         fighting: 'Lutador',
@@ -38,8 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         unknown: 'Desconhecido',
         shadow: 'Sombra'
     };
-
-    // Mapeamento dos status em inglês para português
+    
     const statusPT = {
         hp: 'HP',
         attack: 'Ataque',
@@ -49,10 +50,14 @@ document.addEventListener('DOMContentLoaded', function() {
         speed: 'Velocidade'
     };
     
-    // Carrega todos os Pokémon uma vez
     fetchAllPokemons();
     
-    // Event listeners
+    const generationSelect = document.getElementById('generation-select');
+    generationSelect.addEventListener('change', () => {
+        selectedGeneration = generationSelect.value;
+        filterPokemons();
+    });
+    
     searchButton.addEventListener('click', searchPokemon);
     searchInput.addEventListener('keyup', function(e) {
         if (e.key === 'Enter') {
@@ -85,13 +90,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Função para buscar todos os Pokémon
     async function fetchAllPokemons() {
         try {
             const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10000');
             const data = await response.json();
             
-            // Ordena os Pokémon por ID (extraído da URL)
             allPokemons = data.results.sort((a, b) => {
                 const idA = parseInt(a.url.split('/')[6]);
                 const idB = parseInt(b.url.split('/')[6]);
@@ -100,13 +103,32 @@ document.addEventListener('DOMContentLoaded', function() {
             
             totalPokemons = data.count;
             filteredPokemons = [...allPokemons];
-            loadPokemons();
+            await fetchAllPokemonData();
+            filterPokemons();
         } catch (error) {
             console.error('Erro ao buscar a lista de Pokémon:', error);
         }
     }
     
-    // Função para buscar Pokémon
+    async function fetchAllPokemonData() {
+        allPokemonData = [];
+        for (const pokemon of allPokemons) {
+            const pokemonId = pokemon.url.split('/')[6];
+            try {
+                const [pokemonRes, speciesRes] = await Promise.all([
+                    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`),
+                    fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`)
+                ]);
+                const pokemonData = await pokemonRes.json();
+                const speciesData = await speciesRes.json();
+                pokemonData.generation = speciesData.generation.name.replace('generation-', '');
+                allPokemonData.push(pokemonData);
+            } catch (error) {
+                console.error(`Erro ao buscar dados do Pokémon ID ${pokemonId}:`, error);
+            }
+        }
+    }
+    
     function searchPokemon() {
         const searchTerm = searchInput.value.toLowerCase().trim();
         
@@ -118,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 pokemon.url.split('/')[6].includes(searchTerm)
             );
             
-            // Mantém a ordenação mesmo após busca
             filteredPokemons.sort((a, b) => {
                 const idA = parseInt(a.url.split('/')[6]);
                 const idB = parseInt(b.url.split('/')[6]);
@@ -127,10 +148,33 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         currentPage = 1;
+        filterPokemons();
+    }
+    
+    function filterPokemons() {
+        let filtered = allPokemonData;
+        const searchTerm = searchInput.value.toLowerCase().trim();
+    
+        if (searchTerm !== '') {
+            filtered = filtered.filter(pokemon =>
+                pokemon.name.includes(searchTerm) ||
+                pokemon.id.toString().includes(searchTerm)
+            );
+        }
+    
+        if (selectedGeneration !== 'all') {
+            filtered = filtered.filter(pokemon => pokemon.generation === selectedGeneration);
+        }
+    
+        filteredPokemons = filtered.map(pokemon => ({
+            name: pokemon.name,
+            url: `https://pokeapi.co/api/v2/pokemon/${pokemon.id}/`
+        }));
+    
+        currentPage = 1;
         loadPokemons();
     }
     
-    // Função para carregar os Pokémon da página atual
     async function loadPokemons() {
         const startIndex = (currentPage - 1) * pokemonsPerPage;
         const endIndex = startIndex + pokemonsPerPage;
@@ -139,18 +183,12 @@ document.addEventListener('DOMContentLoaded', function() {
         pokedex.innerHTML = '';
         
         try {
-            // Busca os dados de todos os Pokémon da página atual em paralelo
-            const pokemonDataArray = await Promise.all(
-                pokemonsToShow.map(pokemon => {
-                    const pokemonId = pokemon.url.split('/')[6];
-                    return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then(res => res.json());
-                })
-            );
+            const pokemonDataArray = pokemonsToShow.map(pokemon => {
+                return allPokemonData.find(p => p.id === parseInt(pokemon.url.split('/')[6]));
+            }).filter(p => p !== undefined);
             
-            // Ordena os dados pelo ID do Pokémon
             pokemonDataArray.sort((a, b) => a.id - b.id);
             
-            // Exibe os cards na ordem correta
             pokemonDataArray.forEach(pokemon => {
                 displayPokemonCard(pokemon);
             });
@@ -161,7 +199,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePagination();
     }
     
-    // Função para exibir o card do Pokémon
     function displayPokemonCard(pokemon) {
         const pokemonCard = document.createElement('div');
         pokemonCard.className = 'pokemon-card';
@@ -186,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
         pokemon.types.forEach(type => {
             const typeSpan = document.createElement('span');
             typeSpan.className = `type ${type.type.name}`;
-            // Traduz o tipo para português
+      
             typeSpan.textContent = tiposPT[type.type.name] || type.type.name;
             pokemonTypes.appendChild(typeSpan);
         });
@@ -199,7 +236,6 @@ document.addEventListener('DOMContentLoaded', function() {
         pokedex.appendChild(pokemonCard);
     }
     
-    // Função para mostrar os detalhes do Pokémon
     function showPokemonDetails(pokemon) {
         modalBody.innerHTML = '';
         
@@ -222,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
         pokemon.types.forEach(type => {
             const typeSpan = document.createElement('span');
             typeSpan.className = `type ${type.type.name}`;
-            // Traduz o tipo para português
+            
             typeSpan.textContent = tiposPT[type.type.name] || type.type.name;
             pokemonTypes.appendChild(typeSpan);
         });
@@ -236,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const statName = document.createElement('div');
             statName.className = 'stat-name';
-            // Traduz o nome do status para português
+          
             statName.textContent = statusPT[stat.stat.name] || stat.stat.name.replace('-', ' ');
             
             const statBarContainer = document.createElement('div');
@@ -260,10 +296,11 @@ document.addEventListener('DOMContentLoaded', function() {
         modalBody.appendChild(pokemonId);
         modalBody.appendChild(pokemonName);
         modalBody.appendChild(pokemonImg);
+        modalBody.appendChild(pokemonTypes);
+        modalBody.appendChild(statsContainer);
         pokemonModal.style.display = 'block';
     }
     
-    // Função para atualizar a paginação
     function updatePagination() {
         const maxPage = Math.ceil(filteredPokemons.length / pokemonsPerPage);
         pageInfo.textContent = `Página ${currentPage} de ${maxPage}`;
@@ -271,4 +308,3 @@ document.addEventListener('DOMContentLoaded', function() {
         prevPageButton.disabled = currentPage === 1;
         nextPageButton.disabled = currentPage === maxPage;
     }
-});
