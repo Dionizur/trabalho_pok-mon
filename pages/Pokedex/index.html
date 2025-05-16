@@ -17,18 +17,6 @@
         <div class="search-container">
             <input type="text" id="search-input" placeholder="Procurar Pokémon...">
             <button id="search-button">Buscar</button>
-            <select id="generation-select" aria-label="Selecionar geração">
-                <option value="all">Todas as Gerações</option>
-                <option value="1">Geração 1</option>
-                <option value="2">Geração 2</option>
-                <option value="3">Geração 3</option>
-                <option value="4">Geração 4</option>
-                <option value="5">Geração 5</option>
-                <option value="6">Geração 6</option>
-                <option value="7">Geração 7</option>
-                <option value="8">Geração 8</option>
-                <option value="9">Geração 9</option>
-            </select>
         </div>
     </header>
     <nav class="nav-footer">
@@ -49,7 +37,16 @@
             Pokédex
         </a>
     </nav>
-
+    <div class="container">
+            <div class="pokedex" id="pokedex">
+            </div>
+            
+            <div class="pagination">
+                <button id="prev-page">Anterior</button>
+                <span id="page-info">Página 1</span>
+                <button id="next-page">Próxima</button>
+            </div>
+        </div>
     <style>
         header {
     background-color: #e53935;
@@ -88,7 +85,7 @@ header .logo img {
     display: flex;
     justify-content: space-around;
     padding: 15px 0;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .nav-footer a {
@@ -107,17 +104,9 @@ header .logo img {
 }
     </style>
     
-    <div class="container">
-        <div class="pokedex" id="pokedex">
-        </div>
-        
-        <div class="pagination">
-            <button id="prev-page">Anterior</button>
-            <span id="page-info">Página 1</span>
-            <button id="next-page">Próxima</button>
-        </div>
-    </div>
+   
     
+
     <div class="pokemon-modal" id="pokemon-modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -129,3 +118,4 @@ header .logo img {
     <script src="script.js"></script>
 </body>
 </html>
+    

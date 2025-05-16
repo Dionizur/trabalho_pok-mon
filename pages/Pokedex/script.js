@@ -9,15 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalBody = document.getElementById('modal-body');
     const closeModal = document.querySelector('.close-modal');
     
-    
     let currentPage = 1;
     const pokemonsPerPage = 50;
     let totalPokemons = 0;
     let allPokemons = [];
     let filteredPokemons = [];
-    let allPokemonData = []; // armazenar dados completos incluindo geração
-    let selectedGeneration = 'all';
-    
+
+    // Mapeamento dos tipos em inglês para português
     const tiposPT = {
         normal: 'Normal',
         fighting: 'Lutador',
@@ -40,7 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
         unknown: 'Desconhecido',
         shadow: 'Sombra'
     };
-    
+
+    // Mapeamento dos status em inglês para português
     const statusPT = {
         hp: 'HP',
         attack: 'Ataque',
@@ -50,14 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
         speed: 'Velocidade'
     };
     
+    // Carrega todos os Pokémon uma vez
     fetchAllPokemons();
     
-    const generationSelect = document.getElementById('generation-select');
-    generationSelect.addEventListener('change', () => {
-        selectedGeneration = generationSelect.value;
-        filterPokemons();
-    });
-    
+    // Event listeners
     searchButton.addEventListener('click', searchPokemon);
     searchInput.addEventListener('keyup', function(e) {
         if (e.key === 'Enter') {
@@ -90,11 +85,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Função para buscar todos os Pokémon
     async function fetchAllPokemons() {
         try {
             const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10000');
             const data = await response.json();
             
+            // Ordena os Pokémon por ID (extraído da URL)
             allPokemons = data.results.sort((a, b) => {
                 const idA = parseInt(a.url.split('/')[6]);
                 const idB = parseInt(b.url.split('/')[6]);
@@ -103,32 +100,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
             totalPokemons = data.count;
             filteredPokemons = [...allPokemons];
-            await fetchAllPokemonData();
-            filterPokemons();
+            loadPokemons();
         } catch (error) {
             console.error('Erro ao buscar a lista de Pokémon:', error);
         }
     }
     
-    async function fetchAllPokemonData() {
-        allPokemonData = [];
-        for (const pokemon of allPokemons) {
-            const pokemonId = pokemon.url.split('/')[6];
-            try {
-                const [pokemonRes, speciesRes] = await Promise.all([
-                    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`),
-                    fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`)
-                ]);
-                const pokemonData = await pokemonRes.json();
-                const speciesData = await speciesRes.json();
-                pokemonData.generation = speciesData.generation.name.replace('generation-', '');
-                allPokemonData.push(pokemonData);
-            } catch (error) {
-                console.error(`Erro ao buscar dados do Pokémon ID ${pokemonId}:`, error);
-            }
-        }
-    }
-    
+    // Função para buscar Pokémon
     function searchPokemon() {
         const searchTerm = searchInput.value.toLowerCase().trim();
         
@@ -140,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 pokemon.url.split('/')[6].includes(searchTerm)
             );
             
+            // Mantém a ordenação mesmo após busca
             filteredPokemons.sort((a, b) => {
                 const idA = parseInt(a.url.split('/')[6]);
                 const idB = parseInt(b.url.split('/')[6]);
@@ -148,33 +127,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         currentPage = 1;
-        filterPokemons();
-    }
-    
-    function filterPokemons() {
-        let filtered = allPokemonData;
-        const searchTerm = searchInput.value.toLowerCase().trim();
-    
-        if (searchTerm !== '') {
-            filtered = filtered.filter(pokemon =>
-                pokemon.name.includes(searchTerm) ||
-                pokemon.id.toString().includes(searchTerm)
-            );
-        }
-    
-        if (selectedGeneration !== 'all') {
-            filtered = filtered.filter(pokemon => pokemon.generation === selectedGeneration);
-        }
-    
-        filteredPokemons = filtered.map(pokemon => ({
-            name: pokemon.name,
-            url: `https://pokeapi.co/api/v2/pokemon/${pokemon.id}/`
-        }));
-    
-        currentPage = 1;
         loadPokemons();
     }
     
+    // Função para carregar os Pokémon da página atual
     async function loadPokemons() {
         const startIndex = (currentPage - 1) * pokemonsPerPage;
         const endIndex = startIndex + pokemonsPerPage;
@@ -183,12 +139,18 @@ document.addEventListener('DOMContentLoaded', function() {
         pokedex.innerHTML = '';
         
         try {
-            const pokemonDataArray = pokemonsToShow.map(pokemon => {
-                return allPokemonData.find(p => p.id === parseInt(pokemon.url.split('/')[6]));
-            }).filter(p => p !== undefined);
+            // Busca os dados de todos os Pokémon da página atual em paralelo
+            const pokemonDataArray = await Promise.all(
+                pokemonsToShow.map(pokemon => {
+                    const pokemonId = pokemon.url.split('/')[6];
+                    return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then(res => res.json());
+                })
+            );
             
+            // Ordena os dados pelo ID do Pokémon
             pokemonDataArray.sort((a, b) => a.id - b.id);
             
+            // Exibe os cards na ordem correta
             pokemonDataArray.forEach(pokemon => {
                 displayPokemonCard(pokemon);
             });
@@ -199,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePagination();
     }
     
+    // Função para exibir o card do Pokémon
     function displayPokemonCard(pokemon) {
         const pokemonCard = document.createElement('div');
         pokemonCard.className = 'pokemon-card';
@@ -223,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
         pokemon.types.forEach(type => {
             const typeSpan = document.createElement('span');
             typeSpan.className = `type ${type.type.name}`;
-      
+            // Traduz o tipo para português
             typeSpan.textContent = tiposPT[type.type.name] || type.type.name;
             pokemonTypes.appendChild(typeSpan);
         });
@@ -236,71 +199,73 @@ document.addEventListener('DOMContentLoaded', function() {
         pokedex.appendChild(pokemonCard);
     }
     
-    function showPokemonDetails(pokemon) {
-        modalBody.innerHTML = '';
-        
-        const pokemonId = document.createElement('p');
-        pokemonId.className = 'modal-pokemon-id';
-        pokemonId.textContent = `#${pokemon.id.toString().padStart(3, '0')}`;
-        
-        const pokemonName = document.createElement('h2');
-        pokemonName.className = 'modal-pokemon-name';
-        pokemonName.textContent = pokemon.name;
-        
-        const pokemonImg = document.createElement('img');
-        pokemonImg.className = 'modal-pokemon-img';
-        pokemonImg.src = pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default;
-        pokemonImg.alt = pokemon.name;
-        
-        const pokemonTypes = document.createElement('div');
-        pokemonTypes.className = 'modal-pokemon-types';
-        
-        pokemon.types.forEach(type => {
-            const typeSpan = document.createElement('span');
-            typeSpan.className = `type ${type.type.name}`;
-            
-            typeSpan.textContent = tiposPT[type.type.name] || type.type.name;
-            pokemonTypes.appendChild(typeSpan);
-        });
-        
-        const statsContainer = document.createElement('div');
-        statsContainer.className = 'modal-stats';
-        
-        pokemon.stats.forEach(stat => {
-            const statRow = document.createElement('div');
-            statRow.className = 'stat-row';
-            
-            const statName = document.createElement('div');
-            statName.className = 'stat-name';
-          
-            statName.textContent = statusPT[stat.stat.name] || stat.stat.name.replace('-', ' ');
-            
-            const statBarContainer = document.createElement('div');
-            statBarContainer.className = 'stat-bar-container';
-            
-            const statBar = document.createElement('div');
-            statBar.className = 'stat-bar';
-            statBar.style.width = `${Math.min(100, stat.base_stat)}%`;
-            
-            const statValue = document.createElement('div');
-            statValue.className = 'stat-value';
-            statValue.textContent = stat.base_stat;
-            
-            statBarContainer.appendChild(statBar);
-            statRow.appendChild(statName);
-            statRow.appendChild(statBarContainer);
-            statRow.appendChild(statValue);
-            statsContainer.appendChild(statRow);
-        });
-        
-        modalBody.appendChild(pokemonId);
-        modalBody.appendChild(pokemonName);
-        modalBody.appendChild(pokemonImg);
-        modalBody.appendChild(pokemonTypes);
-        modalBody.appendChild(statsContainer);
-        pokemonModal.style.display = 'block';
-    }
+function showPokemonDetails(pokemon) {
+    console.log('showPokemonDetails called with:', pokemon);
+    modalBody.innerHTML = '';
     
+    const pokemonId = document.createElement('p');
+    pokemonId.className = 'modal-pokemon-id';
+    pokemonId.textContent = `#${pokemon.id.toString().padStart(3, '0')}`;
+    
+    const pokemonName = document.createElement('h2');
+    pokemonName.className = 'modal-pokemon-name';
+    pokemonName.textContent = pokemon.name;
+    
+    const pokemonImg = document.createElement('img');
+    pokemonImg.className = 'modal-pokemon-img';
+    pokemonImg.src = pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default;
+    pokemonImg.alt = pokemon.name;
+    
+    const pokemonTypes = document.createElement('div');
+    pokemonTypes.className = 'modal-pokemon-types';
+    
+    pokemon.types.forEach(type => {
+        const typeSpan = document.createElement('span');
+        typeSpan.className = `type ${type.type.name}`;
+        // Traduz o tipo para português
+        typeSpan.textContent = tiposPT[type.type.name] || type.type.name;
+        pokemonTypes.appendChild(typeSpan);
+    });
+    
+    const statsContainer = document.createElement('div');
+    statsContainer.className = 'modal-stats';
+    
+    pokemon.stats.forEach(stat => {
+        const statRow = document.createElement('div');
+        statRow.className = 'stat-row';
+        
+        const statName = document.createElement('div');
+        statName.className = 'stat-name';
+        // Traduz o nome do status para português
+        statName.textContent = statusPT[stat.stat.name] || stat.stat.name.replace('-', ' ');
+        
+        const statBarContainer = document.createElement('div');
+        statBarContainer.className = 'stat-bar-container';
+        
+        const statBar = document.createElement('div');
+        statBar.className = 'stat-bar';
+        statBar.style.width = `${Math.min(100, stat.base_stat)}%`;
+        
+        const statValue = document.createElement('div');
+        statValue.className = 'stat-value';
+        statValue.textContent = stat.base_stat;
+        
+        statBarContainer.appendChild(statBar);
+        statRow.appendChild(statName);
+        statRow.appendChild(statBarContainer);
+        statRow.appendChild(statValue);
+        statsContainer.appendChild(statRow);
+    });
+    
+    modalBody.appendChild(pokemonId);
+    modalBody.appendChild(pokemonName);
+    modalBody.appendChild(pokemonImg);
+    modalBody.appendChild(pokemonTypes);
+    modalBody.appendChild(statsContainer);
+    pokemonModal.style.display = 'block';
+}
+    
+    // Função para atualizar a paginação
     function updatePagination() {
         const maxPage = Math.ceil(filteredPokemons.length / pokemonsPerPage);
         pageInfo.textContent = `Página ${currentPage} de ${maxPage}`;
@@ -308,3 +273,4 @@ document.addEventListener('DOMContentLoaded', function() {
         prevPageButton.disabled = currentPage === 1;
         nextPageButton.disabled = currentPage === maxPage;
     }
+});
