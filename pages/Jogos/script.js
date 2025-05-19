@@ -19,21 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
       releaseDate: '21 de novembro de 2002',
       description: 'Apresentaram a região Hoenn e batalhas duplas, com gráficos mais coloridos e novas mecânicas, como habilidades de Pokémon.',
       additionalInfo: 'Esses jogos marcaram a transição para o **Game Boy Advance**, trazendo gráficos mais coloridos e um mundo mais dinâmico. Introduziram a mecânica de **batalhas duplas**, onde dois Pokémon lutam simultaneamente, e o sistema de habilidades, dando a cada Pokémon uma habilidade única. A região de Hoenn é repleta de diversidade, com climas tropicais e muitos eventos relacionados aos lendários Kyogre, Groudon e Rayquaza.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/en/5/5d/Pokemon_Ruby_Box.jpg'
+      imageUrl: './assets/img/pokemonruby.jpg'
     },
     {
       title: 'Pokémon Diamond & Pearl',
       releaseDate: '28 de setembro de 2006',
       description: 'Levaram os jogadores à região Sinnoh e introduziram os gráficos 3D no Nintendo DS, além de novos tipos e movimentos de Pokémon.',
       additionalInfo: 'Esses jogos trouxeram a quarta geração de Pokémon, com o suporte para gráficos 3D. A região Sinnoh foi rica em cultura e história, e o enredo girou em torno da organização **Team Galactic** e sua tentativa de manipular os Pokémon lendários **Dialga** e **Palkia**. Além disso, o **Sistema de Troca Global (GTS)** permitiu que jogadores de diferentes partes do mundo trocassem Pokémon online.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/en/8/86/Pokemon_Diamond_Box.jpg'
+      imageUrl: './assets/img/pokemondimond.jpg'
     },
     {
       title: 'Pokémon Legends: Arceus',
       releaseDate: '28 de janeiro de 2022',
       description: 'RPG de ação com mundo aberto, ambientado na região Hisui, prequela de Diamond e Pearl, oferecendo uma nova experiência de captura e exploração de Pokémon.',
       additionalInfo: 'Pokémon Legends: Arceus foi um dos maiores saltos para a franquia, com uma mecânica de **mundo aberto**, onde os jogadores podem capturar Pokémon diretamente no ambiente sem batalhas prévias. O jogo se passa no passado da região Sinnoh, e foca na criação do primeiro **Pokédex** da região, com uma história centrada no Pokémon lendário **Arceus**. A inovação principal foi a mudança de foco, dando aos jogadores maior liberdade para explorar e interagir com o mundo.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/en/a/a7/Pok%C3%A9mon_Legends_Arceus_cover_art.jpg'
+      imageUrl: './assets/img/pokemonarceus.jpg'
     }
   ];
 
