@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       releaseDate: '21 de novembro de 1999',
       description: 'Introduziram a região Johto e 100 novos Pokémon, além de recursos como ciclo de dia e noite, o que trouxe uma nova dinâmica ao jogo.',
       additionalInfo: 'Gold & Silver são considerados por muitos os melhores jogos da série, com uma grande expansão da franquia. Eles trouxeram uma nova mecânica de jogabilidade com o "Pokémon Shiny" e adicionaram o conceito de **Pokémon míticos** e lendários. Além disso, o jogo permitiu aos jogadores retornarem à região Kanto após completar Johto.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/en/6/6e/Pokemon_Gold_Box.jpg'
+      imageUrl: './assets/img/pokemongoldandsilver.jpg'
     },
     {
       title: 'Pokémon Ruby & Sapphire',
