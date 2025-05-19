@@ -66,7 +66,17 @@ document.addEventListener('DOMContentLoaded', function() {
             loadPokemons();
         }
     });
-    
+
+    const prev5PagesButton = document.getElementById('prev-5-pages');
+    prev5PagesButton.addEventListener('click', () => {
+        if (currentPage > 5) {
+            currentPage -= 5;
+        } else {
+            currentPage = 1;
+        }
+        loadPokemons();
+    });
+
     nextPageButton.addEventListener('click', () => {
         const maxPage = Math.ceil(filteredPokemons.length / pokemonsPerPage);
         if (currentPage < maxPage) {
@@ -74,11 +84,22 @@ document.addEventListener('DOMContentLoaded', function() {
             loadPokemons();
         }
     });
-    
+
+    const next5PagesButton = document.getElementById('next-5-pages');
+    next5PagesButton.addEventListener('click', () => {
+        const maxPage = Math.ceil(filteredPokemons.length / pokemonsPerPage);
+        if (currentPage + 5 <= maxPage) {
+            currentPage += 5;
+        } else {
+            currentPage = maxPage;
+        }
+        loadPokemons();
+    });
+
     closeModal.addEventListener('click', () => {
         pokemonModal.style.display = 'none';
     });
-    
+
     window.addEventListener('click', (e) => {
         if (e.target === pokemonModal) {
             pokemonModal.style.display = 'none';
@@ -97,8 +118,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const idB = parseInt(b.url.split('/')[6]);
                 return idA - idB;
             });
+
+            // Filtra para incluir apenas Pokémon até o ID 1024
+            allPokemons = allPokemons.filter(pokemon => {
+                const id = parseInt(pokemon.url.split('/')[6]);
+                return id <= 1024;
+            });
             
-            totalPokemons = data.count;
+            totalPokemons = allPokemons.length;
             filteredPokemons = [...allPokemons];
             loadPokemons();
         } catch (error) {
@@ -236,7 +263,6 @@ function showPokemonDetails(pokemon) {
         
         const statName = document.createElement('div');
         statName.className = 'stat-name';
-        // Traduz o nome do status para português
         statName.textContent = statusPT[stat.stat.name] || stat.stat.name.replace('-', ' ');
         
         const statBarContainer = document.createElement('div');
@@ -265,7 +291,6 @@ function showPokemonDetails(pokemon) {
     pokemonModal.style.display = 'block';
 }
     
-    // Função para atualizar a paginação
     function updatePagination() {
         const maxPage = Math.ceil(filteredPokemons.length / pokemonsPerPage);
         pageInfo.textContent = `Página ${currentPage} de ${maxPage}`;
