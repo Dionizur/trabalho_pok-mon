@@ -36,6 +36,7 @@ header {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px;
+  margin-bottom: 60px;
 }
 
 .game-card {
