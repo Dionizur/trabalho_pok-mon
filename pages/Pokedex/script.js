@@ -33,13 +33,13 @@ document.addEventListener('DOMContentLoaded', function() {
         psychic: 'Psíquico',
         ice: 'Gelo',
         dragon: 'Dragão',
-        dark: 'Noturno',
+        dark: 'Sombrio',
         fairy: 'Fada',
         unknown: 'Desconhecido',
         shadow: 'Sombra'
     };
 
-    // Mapeamento dos status em inglês para português
+
     const statusPT = {
         hp: 'HP',
         attack: 'Ataque',
@@ -48,11 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
         'special-defense': 'Defesa Especial',
         speed: 'Velocidade'
     };
-    
-    // Carrega todos os Pokémon uma vez
+ 
     fetchAllPokemons();
     
-    // Event listeners
     searchButton.addEventListener('click', searchPokemon);
     searchInput.addEventListener('keyup', function(e) {
         if (e.key === 'Enter') {
