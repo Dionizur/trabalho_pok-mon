@@ -12,12 +12,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+    <script>
+        document.getElementById('logo-img').addEventListener('click', function() {
+            // Obtenha o caminho da imagem atual
+            let currentSrc = this.getAttribute('src');
+    
+            // Checa se a imagem atual é a pokeball.webp, se sim, troca para a outra
+            if (currentSrc === 'assets/pokeball.webp') {
+                this.setAttribute('src', 'assets/pokebola2.jpg');  // Substitua por sua nova imagem
+            } else {
+                this.setAttribute('src', 'assets/pokeball.webp');  // Caso contrário, volta para a original
+            }
+        });
+    </script>
+            
 </head>
 
 <body>
     <header>
         <div class="logo">
-            <img src="assets/pokeball.webp" alt="Pokémon Hub" class="logo-img">
+            <img src="assets/pokeball.webp" alt="Pokémon Hub" class="logo-img"id="logo-img">
         </div>
     </header>
 

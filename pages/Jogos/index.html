@@ -6,6 +6,17 @@
   <title>Jogos de Pokémon</title>
   <link rel="stylesheet" href="style.css" />
   
+  <script>
+    document.getElementById('logo-img').addEventListener('click', function() {
+        // Checa se a imagem atual é a pokeball, se sim, troca para a outra
+        if (this.src.includes('pokeball.webp')) {
+            this.src = 'assets/nova-imagem.webp';  // Substitua por sua nova imagem
+        } else {
+            this.src = 'assets/pokeball.webp';  // Caso contrário, volta para a original
+        }
+    });
+</script>
+
 </head>
 <body>
   <header>
