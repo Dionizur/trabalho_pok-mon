@@ -40,17 +40,17 @@ ul {
 }
 
 .section {
-    background-color: #f9f9f9; /* Fundo claro para seções */
+    background-color: #ffffff; /* Fundo claro para seções */
     border-radius: 8px;
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
 
 header {
     background-color: #e53935;
-    color: white;
+    color: rgb(255, 255, 255);
     padding: 20px 0;
     width: 100%;
     text-align: center;
@@ -115,9 +115,11 @@ header .logo img {
     50% { transform: scale(1.1); }
     100% { transform: scale(1); }
 }
+
+
 .red-button {
-    background-color: #e74c3c; /* vermelho vibrante */
-    color: white;
+    background-color: #e74c3c;
+    color: rgb(255, 255, 255);
     border: none;
     border-radius: 4px;
     padding: 6px 12px;
@@ -127,15 +129,18 @@ header .logo img {
     transition: background-color 0.3s ease;
   }
   .red-button:hover {
-    background-color: #c0392b; /* vermelho escuro ao passar o mouse */
+    background-color: #c0392b; 
   }
   #movie-list {
     margin-top: 12px;
     font-size: 14px;
     color: #333;
-    display: none; /* inicialmente oculto */
+    display: none;
   }
 
   .foto1 {
-width: 450px;
+width: 350px;
+padding-bottom: 10px;
+padding: 0px 31px;
+margin-bottom: 30px;
   }
