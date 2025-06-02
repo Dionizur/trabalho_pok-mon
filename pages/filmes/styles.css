@@ -4,6 +4,7 @@ body {
     max-width: 800px;
     margin: 0%;
     padding: 0%;
+    background-color: #f0f0f0;
     color: #333;
     font-size: 14px;
     margin-bottom: 85px;
@@ -43,42 +44,9 @@ ul {
     background-color: #ffffff; /* Fundo claro para seções */
     border-radius: 8px;
     padding: 20px;
-    margin-bottom: 30px;
+    margin: 30px;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
-
-
-header {
-    background-color: #e53935;
-    color: rgb(255, 255, 255);
-    padding: 20px 0;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    font-family: "DM Serif Display", serif;
-}
-
-.logo {
-    font-size: 2px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    font-family: "DM Serif Display", serif;
-}
-
-.logo-img {
-    height: 1px;
-    width: auto;
-    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
-    animation: pulse 2s infinite;
-}
-
-header .logo img {
-    width: 90px; 
-    height: auto; 
-}
-
-
 
 .nav-footer {
     position: fixed;
@@ -88,9 +56,9 @@ header .logo img {
     background-color: #e53935;
     display: flex;
     justify-content: space-around;
-    padding: 15px 0;
+    padding: 5px 0;
     z-index: 1000;
-    font-family: "DM Serif Display", serif;
+    font-family: 'Libre Baskerville', serif;
 }
 
 .nav-footer a {
@@ -100,14 +68,45 @@ header .logo img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: "DM Serif Display", serif;
+    font-family: 'Libre Baskerville', serif;
 }
 
 .nav-icon {
     width: auto;
-    height: 35px;
+    height: 28px;
     margin-right: 0;
     vertical-align: middle;
+}
+
+
+
+header {
+    background-color: #e53935;
+    color: white;
+    padding: 5px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Libre Baskerville', serif;
+}
+
+.logo {
+    font-size: 2px;
+    font-weight: bold;
+    margin: 4px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Libre Baskerville', serif;
+}
+
+.logo-img {
+    height: 1px;
+    width: auto;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+    animation: pulse 2s infinite;
+}
+
+header .logo img {
+    width: 90px;
+    height: auto;
 }
 
 @keyframes pulse {
@@ -138,32 +137,7 @@ header .logo img {
     display: none;
   }
 
-  .foto1 {
-    width: 350px;
-    padding-bottom: 10px;
-    padding: 0px 31px;
-    margin-bottom: 30px;
-  }
-
-  
-  .foto2 {
-    width: 350px;
-    padding-bottom: 10px;
-    padding: 0px 31px;
-    margin-bottom: 30px;
-  }
-
-   
-  .fot3 {
-    width: 350px;
-    padding-bottom: 10px;
-    padding: 0px 31px;
-    margin-bottom: 30px;
-  }
-  
-  .foto4 {
-    width: 350px;
-    padding-bottom: 10px;
-    padding: 0px 31px;
-    margin-bottom: 30px;
+  .foto {
+    width: 300px;
+    margin: 8px;
   }
