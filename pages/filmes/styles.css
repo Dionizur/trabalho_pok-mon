@@ -1,7 +1,7 @@
 body {
     font-family: 'Libre Baskerville', serif;
     line-height: 1.6; 
-    max-width: 800px;
+    max-width: 100%;
     margin: 0%;
     padding: 0%;
     background-color: #f0f0f0;
@@ -44,7 +44,7 @@ ul {
     background-color: #ffffff; /* Fundo claro para seções */
     border-radius: 8px;
     padding: 20px;
-    margin: 30px;
+    margin: 15px;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
@@ -127,7 +127,9 @@ header .logo img {
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  .red-button:hover {
+
+
+.red-button:hover {
     background-color: #c0392b; 
   }
   #movie-list {
@@ -137,7 +139,28 @@ header .logo img {
     display: none;
   }
 
-  .foto {
-    width: 300px;
-    margin: 8px;
-  }
+
+.foto {
+    width: 100%; 
+    max-width: 300px; 
+    margin: 8px auto;
+    display: block; 
+}
+
+
+.nav-footer {
+    flex-wrap: wrap; 
+}
+
+
+.nav-footer a {
+    flex: 1;
+    text-align: center; 
+}
+
+
+.red-button {
+    width: 100%; 
+    max-width: 200px; 
+    margin: 10px auto; 
+}
