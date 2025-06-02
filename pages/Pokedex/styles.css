@@ -96,7 +96,7 @@ header h1 {
     left: 8px;
     font-size: 24px;
     cursor: pointer;
-    color: gold;
+    color: #e60000;
     user-select: none;
     z-index: 10;
 }
@@ -264,6 +264,8 @@ header h1 {
 
 .modal-body {
     padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 .modal-pokemon-img {

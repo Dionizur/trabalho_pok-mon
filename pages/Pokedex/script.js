@@ -311,18 +311,18 @@ window.addEventListener('click', (e) => {
         // Ícone de favorito
         const favoriteIcon = document.createElement('span');
         favoriteIcon.className = 'favorite-icon';
-        favoriteIcon.innerHTML = favoritePokemons.has(pokemon.id.toString()) ? '&#9733;' : '&#9734;'; // estrela cheia ou vazia
+        favoriteIcon.innerHTML = favoritePokemons.has(pokemon.id.toString()) ? '&#10084;' : '&#9825;'; // coração cheio ou vazio
         favoriteIcon.title = favoritePokemons.has(pokemon.id.toString()) ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
         favoriteIcon.addEventListener('click', (event) => {
             event.stopPropagation(); // evita abrir o modal
             const pokemonIdStr = pokemon.id.toString();
             if (favoritePokemons.has(pokemonIdStr)) {
                 favoritePokemons.delete(pokemonIdStr);
-                favoriteIcon.innerHTML = '&#9734;';
+                favoriteIcon.innerHTML = '&#9825;';
                 favoriteIcon.title = 'Adicionar aos favoritos';
             } else {
                 favoritePokemons.add(pokemonIdStr);
-                favoriteIcon.innerHTML = '&#9733;';
+                favoriteIcon.innerHTML = '&#10084;';
                 favoriteIcon.title = 'Remover dos favoritos';
             }
             saveFavorites();
