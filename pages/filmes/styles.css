@@ -139,8 +139,31 @@ header .logo img {
   }
 
   .foto1 {
-width: 350px;
-padding-bottom: 10px;
-padding: 0px 31px;
-margin-bottom: 30px;
+    width: 350px;
+    padding-bottom: 10px;
+    padding: 0px 31px;
+    margin-bottom: 30px;
+  }
+
+  
+  .foto2 {
+    width: 350px;
+    padding-bottom: 10px;
+    padding: 0px 31px;
+    margin-bottom: 30px;
+  }
+
+   
+  .fot3 {
+    width: 350px;
+    padding-bottom: 10px;
+    padding: 0px 31px;
+    margin-bottom: 30px;
+  }
+  
+  .foto4 {
+    width: 350px;
+    padding-bottom: 10px;
+    padding: 0px 31px;
+    margin-bottom: 30px;
   }
