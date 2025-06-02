@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let allPokemons = [];
     let filteredPokemons = [];
 
+    // Conjunto para armazenar os IDs dos pokémons favoritados
+    let favoritePokemons = new Set();
+
     // Mapeamento dos tipos em inglês para português
     const tiposPT = {
         normal: 'Normal',
@@ -39,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
         shadow: 'Sombra'
     };
 
-
     const statusPT = {
         hp: 'HP',
         attack: 'Ataque',
@@ -48,68 +50,107 @@ document.addEventListener('DOMContentLoaded', function() {
         'special-defense': 'Defesa Especial',
         speed: 'Velocidade'
     };
- 
-    fetchAllPokemons();
-    
-    searchButton.addEventListener('click', searchPokemon);
-    searchInput.addEventListener('keyup', function(e) {
-        if (e.key === 'Enter') {
-            searchPokemon();
-        }
-    });
-    
-    prevPageButton.addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            loadPokemons();
-        }
-    });
 
-    const prev5PagesButton = document.getElementById('prev-5-pages');
-    prev5PagesButton.addEventListener('click', () => {
-        if (currentPage > 5) {
-            currentPage -= 5;
-        } else {
-            currentPage = 1;
+    // Função para carregar favoritos do localStorage
+    function loadFavorites() {
+        const storedFavorites = localStorage.getItem('favoritePokemons');
+        if (storedFavorites) {
+            try {
+                const favArray = JSON.parse(storedFavorites);
+                favoritePokemons = new Set(favArray);
+            } catch (e) {
+                console.error('Erro ao carregar favoritos do localStorage:', e);
+            }
         }
+    }
+
+    // Função para salvar favoritos no localStorage
+    function saveFavorites() {
+        localStorage.setItem('favoritePokemons', JSON.stringify(Array.from(favoritePokemons)));
+    }
+
+let showFavoritesOnly = false;
+
+fetchAllPokemons();
+
+const toggleFavoritesButton = document.getElementById('toggle-favorites-button');
+toggleFavoritesButton.addEventListener('click', () => {
+    showFavoritesOnly = !showFavoritesOnly;
+    if (showFavoritesOnly) {
+        toggleFavoritesButton.textContent = 'Mostrar Todos';
+        filterFavorites();
+    } else {
+        toggleFavoritesButton.textContent = 'Mostrar Favoritos';
+        filteredPokemons = [...allPokemons];
+        currentPage = 1;
         loadPokemons();
-    });
+    }
+});
 
-    nextPageButton.addEventListener('click', () => {
-        const maxPage = Math.ceil(filteredPokemons.length / pokemonsPerPage);
-        if (currentPage < maxPage) {
-            currentPage++;
-            loadPokemons();
-        }
-    });
+searchButton.addEventListener('click', searchPokemon);
+searchInput.addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') {
+        searchPokemon();
+    }
+});
 
-    const next5PagesButton = document.getElementById('next-5-pages');
-    next5PagesButton.addEventListener('click', () => {
-        const maxPage = Math.ceil(filteredPokemons.length / pokemonsPerPage);
-        if (currentPage + 5 <= maxPage) {
-            currentPage += 5;
-        } else {
-            currentPage = maxPage;
-        }
+prevPageButton.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
         loadPokemons();
-    });
+    }
+});
 
-    closeModal.addEventListener('click', () => {
+const prev5PagesButton = document.getElementById('prev-5-pages');
+prev5PagesButton.addEventListener('click', () => {
+    if (currentPage > 5) {
+        currentPage -= 5;
+    } else {
+        currentPage = 1;
+    }
+    loadPokemons();
+});
+
+nextPageButton.addEventListener('click', () => {
+    const maxPage = Math.ceil(filteredPokemons.length / pokemonsPerPage);
+    if (currentPage < maxPage) {
+        currentPage++;
+        loadPokemons();
+    }
+});
+
+const next5PagesButton = document.getElementById('next-5-pages');
+next5PagesButton.addEventListener('click', () => {
+    const maxPage = Math.ceil(filteredPokemons.length / pokemonsPerPage);
+    if (currentPage + 5 <= maxPage) {
+        currentPage += 5;
+    } else {
+        currentPage = maxPage;
+    }
+    loadPokemons();
+});
+
+closeModal.addEventListener('click', () => {
+    pokemonModal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === pokemonModal) {
         pokemonModal.style.display = 'none';
-    });
+    }
+});
 
-    window.addEventListener('click', (e) => {
-        if (e.target === pokemonModal) {
-            pokemonModal.style.display = 'none';
-        }
-    });
-    
     // Função para buscar todos os Pokémon
     async function fetchAllPokemons() {
+        console.log('fetchAllPokemons called');
         try {
             const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10000');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.json();
-            
+            console.log('fetchAllPokemons data received:', data);
+
             // Ordena os Pokémon por ID (extraído da URL)
             allPokemons = data.results.sort((a, b) => {
                 const idA = parseInt(a.url.split('/')[6]);
@@ -125,10 +166,49 @@ document.addEventListener('DOMContentLoaded', function() {
             
             totalPokemons = allPokemons.length;
             filteredPokemons = [...allPokemons];
+            loadFavorites();
             loadPokemons();
         } catch (error) {
             console.error('Erro ao buscar a lista de Pokémon:', error);
         }
+    }
+    
+    // Função para buscar Pokémon
+    async function loadPokemons() {
+        console.log('loadPokemons called');
+        const startIndex = (currentPage - 1) * pokemonsPerPage;
+        const endIndex = startIndex + pokemonsPerPage;
+        const pokemonsToShow = filteredPokemons.slice(startIndex, endIndex);
+        
+        pokedex.innerHTML = '';
+        
+        try {
+            // Busca os dados de todos os Pokémon da página atual em paralelo
+            const pokemonDataArray = await Promise.all(
+                pokemonsToShow.map(pokemon => {
+                    const pokemonId = pokemon.url.split('/')[6];
+                    return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then(res => {
+                        if (!res.ok) {
+                            throw new Error(`HTTP error! status: ${res.status}`);
+                        }
+                        return res.json();
+                    });
+                })
+            );
+            console.log('loadPokemons pokemonDataArray received:', pokemonDataArray);
+            
+            // Ordena os dados pelo ID do Pokémon
+            pokemonDataArray.sort((a, b) => a.id - b.id);
+            
+            // Exibe os cards na ordem correta
+            pokemonDataArray.forEach(pokemon => {
+                displayPokemonCard(pokemon);
+            });
+        } catch (error) {
+            console.error('Erro ao buscar dados dos Pokémon:', error);
+        }
+        
+        updatePagination();
     }
     
     // Função para buscar Pokémon
@@ -151,6 +231,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
+        currentPage = 1;
+        loadPokemons();
+    }
+    
+    function filterFavorites() {
+        filteredPokemons = allPokemons.filter(pokemon => favoritePokemons.has(pokemon.url.split('/')[6]));
         currentPage = 1;
         loadPokemons();
     }
@@ -190,7 +276,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayPokemonCard(pokemon) {
         const pokemonCard = document.createElement('div');
         pokemonCard.className = 'pokemon-card';
-        pokemonCard.addEventListener('click', () => showPokemonDetails(pokemon));
+
+        // Evento para abrir modal ao clicar no card (exceto no ícone de favorito)
+        pokemonCard.addEventListener('click', (event) => {
+            if (!event.target.classList.contains('favorite-icon')) {
+                showPokemonDetails(pokemon);
+            }
+        });
         
         const pokemonId = document.createElement('p');
         pokemonId.className = 'pokemon-id';
@@ -215,7 +307,28 @@ document.addEventListener('DOMContentLoaded', function() {
             typeSpan.textContent = tiposPT[type.type.name] || type.type.name;
             pokemonTypes.appendChild(typeSpan);
         });
-        
+
+        // Ícone de favorito
+        const favoriteIcon = document.createElement('span');
+        favoriteIcon.className = 'favorite-icon';
+        favoriteIcon.innerHTML = favoritePokemons.has(pokemon.id.toString()) ? '&#9733;' : '&#9734;'; // estrela cheia ou vazia
+        favoriteIcon.title = favoritePokemons.has(pokemon.id.toString()) ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
+        favoriteIcon.addEventListener('click', (event) => {
+            event.stopPropagation(); // evita abrir o modal
+            const pokemonIdStr = pokemon.id.toString();
+            if (favoritePokemons.has(pokemonIdStr)) {
+                favoritePokemons.delete(pokemonIdStr);
+                favoriteIcon.innerHTML = '&#9734;';
+                favoriteIcon.title = 'Adicionar aos favoritos';
+            } else {
+                favoritePokemons.add(pokemonIdStr);
+                favoriteIcon.innerHTML = '&#9733;';
+                favoriteIcon.title = 'Remover dos favoritos';
+            }
+            saveFavorites();
+        });
+
+        pokemonCard.appendChild(favoriteIcon);
         pokemonCard.appendChild(pokemonId);
         pokemonCard.appendChild(pokemonName);
         pokemonCard.appendChild(pokemonImg);
@@ -224,70 +337,70 @@ document.addEventListener('DOMContentLoaded', function() {
         pokedex.appendChild(pokemonCard);
     }
     
-function showPokemonDetails(pokemon) {
-    console.log('showPokemonDetails called with:', pokemon);
-    modalBody.innerHTML = '';
-    
-    const pokemonId = document.createElement('p');
-    pokemonId.className = 'modal-pokemon-id';
-    pokemonId.textContent = `#${pokemon.id.toString().padStart(3, '0')}`;
-    
-    const pokemonName = document.createElement('h2');
-    pokemonName.className = 'modal-pokemon-name';
-    pokemonName.textContent = pokemon.name;
-    
-    const pokemonImg = document.createElement('img');
-    pokemonImg.className = 'modal-pokemon-img';
-    pokemonImg.src = pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default;
-    pokemonImg.alt = pokemon.name;
-    
-    const pokemonTypes = document.createElement('div');
-    pokemonTypes.className = 'modal-pokemon-types';
-    
-    pokemon.types.forEach(type => {
-        const typeSpan = document.createElement('span');
-        typeSpan.className = `type ${type.type.name}`;
-        // Traduz o tipo para português
-        typeSpan.textContent = tiposPT[type.type.name] || type.type.name;
-        pokemonTypes.appendChild(typeSpan);
-    });
-    
-    const statsContainer = document.createElement('div');
-    statsContainer.className = 'modal-stats';
-    
-    pokemon.stats.forEach(stat => {
-        const statRow = document.createElement('div');
-        statRow.className = 'stat-row';
+    function showPokemonDetails(pokemon) {
+        console.log('showPokemonDetails called with:', pokemon);
+        modalBody.innerHTML = '';
         
-        const statName = document.createElement('div');
-        statName.className = 'stat-name';
-        statName.textContent = statusPT[stat.stat.name] || stat.stat.name.replace('-', ' ');
+        const pokemonId = document.createElement('p');
+        pokemonId.className = 'modal-pokemon-id';
+        pokemonId.textContent = `#${pokemon.id.toString().padStart(3, '0')}`;
         
-        const statBarContainer = document.createElement('div');
-        statBarContainer.className = 'stat-bar-container';
+        const pokemonName = document.createElement('h2');
+        pokemonName.className = 'modal-pokemon-name';
+        pokemonName.textContent = pokemon.name;
         
-        const statBar = document.createElement('div');
-        statBar.className = 'stat-bar';
-        statBar.style.width = `${Math.min(100, stat.base_stat)}%`;
+        const pokemonImg = document.createElement('img');
+        pokemonImg.className = 'modal-pokemon-img';
+        pokemonImg.src = pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default;
+        pokemonImg.alt = pokemon.name;
         
-        const statValue = document.createElement('div');
-        statValue.className = 'stat-value';
-        statValue.textContent = stat.base_stat;
+        const pokemonTypes = document.createElement('div');
+        pokemonTypes.className = 'modal-pokemon-types';
         
-        statBarContainer.appendChild(statBar);
-        statRow.appendChild(statName);
-        statRow.appendChild(statBarContainer);
-        statRow.appendChild(statValue);
-        statsContainer.appendChild(statRow);
-    });
-    
-    modalBody.appendChild(pokemonId);
-    modalBody.appendChild(pokemonName);
-    modalBody.appendChild(pokemonImg);
-    modalBody.appendChild(pokemonTypes);
-    modalBody.appendChild(statsContainer);
-    pokemonModal.style.display = 'block';
-}
+        pokemon.types.forEach(type => {
+            const typeSpan = document.createElement('span');
+            typeSpan.className = `type ${type.type.name}`;
+            // Traduz o tipo para português
+            typeSpan.textContent = tiposPT[type.type.name] || type.type.name;
+            pokemonTypes.appendChild(typeSpan);
+        });
+        
+        const statsContainer = document.createElement('div');
+        statsContainer.className = 'modal-stats';
+        
+        pokemon.stats.forEach(stat => {
+            const statRow = document.createElement('div');
+            statRow.className = 'stat-row';
+            
+            const statName = document.createElement('div');
+            statName.className = 'stat-name';
+            statName.textContent = statusPT[stat.stat.name] || stat.stat.name.replace('-', ' ');
+            
+            const statBarContainer = document.createElement('div');
+            statBarContainer.className = 'stat-bar-container';
+            
+            const statBar = document.createElement('div');
+            statBar.className = 'stat-bar';
+            statBar.style.width = `${Math.min(100, stat.base_stat)}%`;
+            
+            const statValue = document.createElement('div');
+            statValue.className = 'stat-value';
+            statValue.textContent = stat.base_stat;
+            
+            statBarContainer.appendChild(statBar);
+            statRow.appendChild(statName);
+            statRow.appendChild(statBarContainer);
+            statRow.appendChild(statValue);
+            statsContainer.appendChild(statRow);
+        });
+        
+        modalBody.appendChild(pokemonId);
+        modalBody.appendChild(pokemonName);
+        modalBody.appendChild(pokemonImg);
+        modalBody.appendChild(pokemonTypes);
+        modalBody.appendChild(statsContainer);
+        pokemonModal.style.display = 'block';
+    }
     
     function updatePagination() {
         const maxPage = Math.ceil(filteredPokemons.length / pokemonsPerPage);
