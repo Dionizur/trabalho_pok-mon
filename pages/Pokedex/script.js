@@ -337,7 +337,7 @@ window.addEventListener('click', (e) => {
         pokedex.appendChild(pokemonCard);
     }
     
-    function showPokemonDetails(pokemon) {
+    async function showPokemonDetails(pokemon) {
         console.log('showPokemonDetails called with:', pokemon);
         modalBody.innerHTML = '';
         
@@ -364,6 +364,58 @@ window.addEventListener('click', (e) => {
             typeSpan.textContent = tiposPT[type.type.name] || type.type.name;
             pokemonTypes.appendChild(typeSpan);
         });
+        
+        // Exibir habilidades
+        const abilitiesContainer = document.createElement('div');
+        abilitiesContainer.className = 'modal-abilities';
+        const abilitiesTitle = document.createElement('h3');
+        abilitiesTitle.textContent = 'Habilidades';
+        abilitiesContainer.appendChild(abilitiesTitle);
+        
+        pokemon.abilities.forEach(abilityInfo => {
+            const ability = document.createElement('p');
+            ability.textContent = abilityInfo.ability.name;
+            abilitiesContainer.appendChild(ability);
+        });
+
+        // Buscar e exibir cadeia de evolução
+        const evolutionContainer = document.createElement('div');
+        evolutionContainer.className = 'modal-evolution';
+        const evolutionTitle = document.createElement('h3');
+        evolutionTitle.textContent = 'Evolução';
+        evolutionContainer.appendChild(evolutionTitle);
+
+        try {
+            const speciesResponse = await fetch(pokemon.species.url);
+            if (!speciesResponse.ok) throw new Error('Erro ao buscar dados da espécie');
+            const speciesData = await speciesResponse.json();
+
+            const evolutionResponse = await fetch(speciesData.evolution_chain.url);
+            if (!evolutionResponse.ok) throw new Error('Erro ao buscar cadeia de evolução');
+            const evolutionData = await evolutionResponse.json();
+
+            const evolutionChain = [];
+            let current = evolutionData.chain;
+
+            do {
+                evolutionChain.push({
+                    name: current.species.name,
+                    url: current.species.url
+                });
+                current = current.evolves_to[0];
+            } while (current && current.hasOwnProperty('evolves_to'));
+
+            evolutionChain.forEach(evo => {
+                const evoElement = document.createElement('p');
+                evoElement.textContent = evo.name;
+                evolutionContainer.appendChild(evoElement);
+            });
+        } catch (error) {
+            const errorMsg = document.createElement('p');
+            errorMsg.textContent = 'Não foi possível carregar a cadeia de evolução.';
+            evolutionContainer.appendChild(errorMsg);
+            console.error(error);
+        }
         
         const statsContainer = document.createElement('div');
         statsContainer.className = 'modal-stats';
@@ -398,6 +450,8 @@ window.addEventListener('click', (e) => {
         modalBody.appendChild(pokemonName);
         modalBody.appendChild(pokemonImg);
         modalBody.appendChild(pokemonTypes);
+        modalBody.appendChild(abilitiesContainer);
+        modalBody.appendChild(evolutionContainer);
         modalBody.appendChild(statsContainer);
         pokemonModal.style.display = 'block';
     }

@@ -197,6 +197,61 @@ header h1 {
     width: 90%;
     max-width: 600px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-abilities, .modal-evolution, .modal-stats {
+    margin-top: 10px;
+}
+
+.modal-abilities h3, .modal-evolution h3, .modal-stats h3 {
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.modal-abilities p, .modal-evolution p {
+    margin: 3px 0;
+    text-transform: capitalize;
+}
+
+@media (max-width: 600px) {
+    .pokemon-card {
+        padding: 10px;
+    }
+    .pokemon-img {
+        width: 100px;
+        height: 100px;
+    }
+    .pokemon-name {
+        font-size: 1rem;
+    }
+    .pokemon-id {
+        font-size: 12px;
+    }
+    .modal-content {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+    .modal-pokemon-img {
+        width: 150px;
+        height: 150px;
+    }
+    .modal-pokemon-name {
+        font-size: 22px;
+    }
+    .modal-pokemon-id {
+        font-size: 16px;
+    }
+    .modal-abilities p, .modal-evolution p {
+        font-size: 14px;
+    }
+    .modal-abilities h3, .modal-evolution h3, .modal-stats h3 {
+        font-size: 16px;
+    }
 }
 
 .close-modal {
