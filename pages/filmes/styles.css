@@ -164,3 +164,18 @@ header .logo img {
     max-width: 200px; 
     margin: 10px auto; 
 }
+
+/* Exemplo: fixar no canto inferior direito */
+#alcremie-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+  }
+  
+  /* Ou centralizar na página */
+  #alcremie-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto;
+    width: 100px;
+  }
