@@ -68,3 +68,44 @@ document.addEventListener('DOMContentLoaded', () => {
     gamesList.appendChild(gameCard);
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const pokemonContainer = document.getElementById("pokemon-container");
+
+  // Função para buscar Pokémon do jogo
+  async function getPokemonFromGame(gameName) {
+      try {
+          const response = await fetch(`https://pokeapi.co/api/v2/version/${gameName}`);
+          const data = await response.json();
+
+          // Cada versão tem "version_group", que liga aos Pokémon disponíveis
+          const versionGroup = data.version_group.url;
+          const groupResponse = await fetch(versionGroup);
+          const groupData = await groupResponse.json();
+
+          // Filtra os Pokémon adicionados neste grupo
+          const pokedexUrl = groupData.pokedexes[0].url;
+          const pokedexResponse = await fetch(pokedexUrl);
+          const pokedexData = await pokedexResponse.json();
+
+          displayPokemon(pokedexData.pokemon_entries);
+      } catch (error) {
+          pokemonContainer.innerHTML = `<p>Erro ao carregar Pokémon para ${gameName}</p>`;
+      }
+  }
+
+  // Função para mostrar na tela
+  function displayPokemon(pokemonList) {
+      pokemonContainer.innerHTML = "";
+      pokemonList.forEach(p => {
+          const div = document.createElement("div");
+          div.classList.add("pokemon-card");
+          div.innerHTML = `
+              <p>#${p.entry_number} - ${p.pokemon_species.name}</p>
+          `;
+          pokemonContainer.appendChild(div);
+      });
+  }
+
+  // Exemplo: puxando Pokémon da versão "red"
+  getPokemonFromGame("red");
+});
