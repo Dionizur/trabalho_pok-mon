@@ -1,62 +1,38 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const loginForm = document.getElementById('loginForm');
-    const forgotPasswordLink = document.querySelector('.forgot-password');
-    
-    // Função para validar email
-    function isValidEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-    
-    // Função para validar senha (mínimo 6 caracteres)
-    function isValidPassword(password) {
-        return password.length >= 6;
-    }
-    
-    // Evento de submit do formulário
-    loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
-        
-        // Validação dos campos
-        if (!email || !password) {
-            alert('Por favor, preencha todos os campos!');
-            return;
-        }
-        
-        if (!isValidEmail(email)) {
-            alert('Por favor, insira um e-mail válido!');
-            return;
-        }
-        
-        if (!isValidPassword(password)) {
-            alert('A senha deve ter pelo menos 6 caracteres!');
-            return;
-        }
-        
-        // Simulação de login bem-sucedido
-        // Aqui você pode adicionar uma chamada AJAX para um backend real
-        console.log('Tentativa de login com:', { email, password });
-        alert('Login realizado com sucesso! Redirecionando...');
-        
-        // Redirecionamento após 1 segundo
-        setTimeout(() => {
-            window.location.href = './pages/index.html';
-        }, 1000);
-    });
-    
-    // Evento para o link "Esqueceu a senha"
-    forgotPasswordLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        const email = prompt('Digite seu e-mail para redefinir a senha:');
-        
-        if (email && isValidEmail(email)) {
-            alert(`Um link de redefinição foi enviado para ${email}`);
-            // Aqui você poderia adicionar lógica para enviar o email
-        } else if (email) {
-            alert('Por favor, insira um e-mail válido!');
-        }
-    });
+document.getElementById('registerForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const email = document.getElementById('newUsername').value;
+    const password = document.getElementById('newPassword').value;
+    createUserWithEmailAndPassword(window.auth, email, password)
+        .then((userCredential) => {
+            alert('Conta criada com sucesso!');
+            this.reset();
+        })
+        .catch((error) => {
+            alert('Erro ao criar conta: ' + error.message);
+        });
 });
+
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const email = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    signInWithEmailAndPassword(window.auth, email, password)
+        .then((userCredential) => {
+            alert('Login bem-sucedido!');
+            this.reset();
+        })
+        .catch((error) => {
+            alert('Usuário ou senha incorretos: ' + error.message);
+        });
+});
+
+document.getElementById('showRegister').addEventListener('click', function() {
+    document.getElementById('loginSection').classList.add('hidden');
+    document.getElementById('registerSection').classList.remove('hidden');
+});
+
+document.getElementById('showLogin').addEventListener('click', function() {
+    document.getElementById('registerSection').classList.add('hidden');
+    document.getElementById('loginSection').classList.remove('hidden');
+});
+

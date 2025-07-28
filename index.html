@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="https://www.pngplay.com/wp-content/uploads/2/Pokeball-PNG-Photo-Image.png">
     
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -19,35 +19,73 @@
         </div>
     </header>
 
+    <main>
+        <div class="login-wrapper">
+            <section class="login-container" id="loginSection">
+                <h1>Login</h1>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="username">Usuário:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="login-button">Entrar</button>
+                </form>
+                <p>Não tem uma conta? <button id="showRegister" class="toggle-button">Registrar</button></p>
+            </section>
 
-    <div class="login-container">
-        <div class="container-inside">
-        <div class="pokeball"></div>
-        <h1>FAÇA SEU LOGIN AQUI</h1>
-        
-        <div class="input-group">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" placeholder="Seu e-mail">
+            <section class="login-container hidden" id="registerSection">
+                <h2>Criar Conta</h2>
+                <form id="registerForm">
+                    <div class="input-group">
+                        <label for="newUsername">Usuário:</label>
+                        <input type="text" id="newUsername" name="newUsername" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="newPassword">Senha:</label>
+                        <input type="password" id="newPassword" name="newPassword" required>
+                    </div>
+                    <button type="submit" class="login-button">Registrar</button>
+                </form>
+                <p>Já tem uma conta? <button id="showLogin" class="toggle-button">Entrar</button></p>
+            </section>
         </div>
-        
-        <div class="input-group">
-            <label for="password">Senha</label>
-            <input type="password" id="password" placeholder="Sua senha">
-        </div>
-        
-        <a href="#" class="forgot-password">Forgot Password?</a>
+    </main>
 
-        <a href="./pages/index.html">
-            <button class="login-button">Login</button>
-        </a>
-        
-    </div>
-    </div>
-<footer class="footer">
+    <footer class="footer">
         <p>&copy; 2025 App Pokémon. Todos os direitos reservados.</p>
-</footer>
+    </footer>
 
-<script src="./script.js"></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
+      import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBOBf9gdaCuiHjsOzaVUDprkjlS8hm2jMk",
+        authDomain: "pukimun-acfac.firebaseapp.com",
+        projectId: "pukimun-acfac",
+        storageBucket: "pukimun-acfac.firebasestorage.app",
+        messagingSenderId: "486936503883",
+        appId: "1:486936503883:web:a6611ebbae830fdf1c0fce",
+        measurementId: "G-SGHPTQ6EPS"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth(app);
+
+      window.auth = auth;
+      window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+      window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+    </script>
+    <script src="script.js" type="module"></script>
 
 </body>
 </html>
