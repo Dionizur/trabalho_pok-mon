@@ -20,6 +20,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         .then((userCredential) => {
             alert('Login bem-sucedido!');
             this.reset();
+            window.location.href = 'pages/index.html';
         })
         .catch((error) => {
             alert('Usuário ou senha incorretos: ' + error.message);
