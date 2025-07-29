@@ -4,13 +4,13 @@ body{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center
+        align-items: center;
     }
     header {
         width: 100%;
         background-color: #e53935;
         color: white;
-        padding: 20px 0;
+        padding: 2% 2%;
         text-align: center;
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
@@ -43,11 +43,11 @@ body{
     .footer {
         background-color: #e53935;
         color: white;
-        padding: 15px 0;
+        padding: 2% 2%;
         text-align: center;
         width: 100%;
         position: absolute;
-        bottom: 0%;
+        bottom: -1.81%;
     }
 
     .input-group {
