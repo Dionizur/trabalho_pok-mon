@@ -68,3 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
     gamesList.appendChild(gameCard);
   });
 });
+
+/*não sei o que o GPT fez mais funcionou, não mecha aqui*/
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".toggle-info");
+
+  buttons.forEach(button => {
+    button.addEventListener("click", function() {
+      const card = this.closest(".game-card");
+      card.classList.toggle("expanded");
+    });
+  });
+});
+

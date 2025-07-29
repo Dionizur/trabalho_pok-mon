@@ -7,16 +7,33 @@
   <link rel="stylesheet" href="style.css" />
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const logo = document.querySelector(".logo-img");
+  const logo = document.querySelector(".logo-img");
 
-      logo.addEventListener("click", function() {
-        if (this.src.includes("pokeball.webp")) {
-          this.src = "./assets/img/pokebola2.png"; // Correto
-        } else {
-          this.src = "../assets/pokeball.webp"; // Volta para original
-        }
-      });
+  logo.addEventListener("click", function() {
+    // Animação de giro
+    logo.classList.add("spin");
+
+    // Troca a imagem
+    if (this.src.includes("pokeball.webp")) {
+      this.src = "./assets/img/pokebola2.png";
+    } else {
+      this.src = "../assets/pokeball.webp";
+    }
+
+    // Remove a classe após a animação
+    setTimeout(() => logo.classList.remove("spin"), 600);
+  });
+
+  // Expansão dos cards
+  const buttons = document.querySelectorAll(".toggle-info");
+  buttons.forEach(button => {
+    button.addEventListener("click", function() {
+      const card = this.closest(".game-card");
+      card.classList.toggle("expanded");
     });
+  });
+});
+
   </script>
 </head>
 <body>

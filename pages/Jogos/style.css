@@ -21,28 +21,39 @@ header {
   align-items: center;
 }
 
-header .logo img,
+/* Animações */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
 .logo-img {
-  width: 120px; 
-  height: auto; 
+  width: 120px;
+  height: auto;
   max-height: 120px;
   object-fit: contain;
   cursor: pointer;
   filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+  animation: pulse 2s infinite;
   transition: transform 0.3s ease;
 }
 
-header .logo img:hover,
-.logo-img:hover {
-  transform: scale(1.1);
+.logo-img.spin {
+  animation: spin 0.6s ease;
 }
 
-/* Título fora da header */
+/* Título */
 .titulo {
   text-align: center;
   margin: 20px auto;
   padding-bottom: 10px;
-  border-bottom: 3px solid #e53935; /* Divisória visível */
+  border-bottom: 3px solid #e53935;
   width: 80%;
 }
 
@@ -75,8 +86,12 @@ header .logo img:hover,
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  height: 350px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 500px;
+  transition: height 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card.expanded {
+  height: 1000px;
 }
 
 .game-card:hover {
