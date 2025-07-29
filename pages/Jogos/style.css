@@ -16,18 +16,44 @@ header {
   background-color: #e60012; /* Vermelho Pokémon */
   color: white;
   padding: 20px;
-  align-items: center;
-}
-
-.header-content {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
 }
 
-.pokeball-img {
-  width: 80px;
-  height: 80px;
+header .logo img,
+.logo-img {
+  width: 120px; 
+  height: auto; 
+  max-height: 120px;
+  object-fit: contain;
+  cursor: pointer;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+  transition: transform 0.3s ease;
+}
+
+header .logo img:hover,
+.logo-img:hover {
+  transform: scale(1.1);
+}
+
+/* Título fora da header */
+.titulo {
+  text-align: center;
+  margin: 20px auto;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #e53935; /* Divisória visível */
+  width: 80%;
+}
+
+.titulo h1 {
+  font-size: 2rem;
+  color: #3d7dca;
+}
+
+.titulo p {
+  font-size: 1rem;
+  color: #555;
 }
 
 /* Lista de jogos */
@@ -41,94 +67,67 @@ header {
 
 .game-card {
   background-color: white;
-  border-radius: 8px;
+  border: 2px solid #e60012;
+  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  height: 350px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .game-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .game-card img {
   width: 100%;
-  height: auto;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 10px;
 }
 
 .game-card .content {
-  padding: 15px;
+  flex-grow: 1;
+  text-align: center;
 }
 
 .game-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: #3d7dca;
+  margin-bottom: 8px;
 }
 
 .game-card p {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #555;
 }
 
-/* Footer */
-footer {
-  background-color: #e53935;
+button.toggle-info {
+  background-color: #ef5350;
   color: white;
-  text-align: center;
-  padding: 10px;
-}
-/* From Uiverse.io by faxriddin20 */ 
-.button-container {
-  display: flex;
-  background-color: black;
-  width: 330px;
-  height: 40px;
-  align-items: center;
-  justify-content: space-around;
-  border-radius: 10px;
-}
-
-.button {
-  outline: 0 !important;
-  border: 0 !important;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  transition: all ease-in-out 0.3s;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 10px;
   cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-.button:hover {
-  transform: translateY(-3px);
+button.toggle-info:hover {
+  background-color: #d32f2f;
 }
 
-.icon {
-  font-size: 20px;
-}
-.logo {
-  font-size: 2px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+.additional-info {
+  margin-top: 0.5rem;
+  color: #333;
 }
 
-.logo-img {
-  height: 0.5px;
-  width: auto;
-  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
-  animation: pulse 2s infinite;
-}
-
-header .logo img {
-  width: 100px; 
-  height: auto; 
-}
-
-
+/* Footer */
 .nav-footer {
   position: fixed;
   bottom: 0;
@@ -154,37 +153,4 @@ header .logo img {
   width: auto;
   height: 35px;
   vertical-align: middle;
-}
-.game-card {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-}
-
-.game-img {
-  width: 60%; /* ou outro valor menor */
-  max-width: 300px;
-  display: block;
-  margin: 0 auto 1rem;
-}
-
-button.toggle-info {
-  background-color: #ef5350;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  margin-top: 0.5rem;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-button.toggle-info:hover {
-  background-color: #d32f2f;
-}
-
-.additional-info {
-  margin-top: 0.5rem;
-  color: #333;
 }
