@@ -5,8 +5,7 @@
     font-family: 'Libre Baskerville', serif;
 }
 
-html,
-body {
+html, body {
     height: 100vh;
     width: 100vw;
     margin: 0;
@@ -31,18 +30,19 @@ header {
 }
 
 .logo {
-    font-size: 2px;
+    font-size: 1.2em; /* Ajuste para um tamanho de fonte legível */
     font-weight: bold;
     margin: 4px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .logo-img {
-    height: 1px;
+    height: 50px; /* Ajuste para um tamanho de imagem apropriado */
     width: auto;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
     animation: pulse 2s infinite;
 }
+
 
 header .logo img {
     width: 90px;
@@ -209,6 +209,8 @@ h2 {
 }
 
 
+/* ... (restante do CSS) ... */
+
 .nav-footer {
     position: fixed;
     bottom: 0;
@@ -217,11 +219,11 @@ h2 {
     background-color: #e53935;
     display: flex;
     justify-content: space-around;
-    padding: 5px 0;
+    padding: 15px 0; /* Ajuste no padding para centralizar verticalmente */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ajuste na sombra */
     z-index: 1000;
-    font-family: 'Libre Baskerville', serif;
+    font-size: 14px; /* Tamanho de fonte reduzido */
 }
-
 
 .nav-footer a {
     color: white;
@@ -230,29 +232,21 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Libre Baskerville', serif;
-    font-size: 16px;
+    font-size: 14px; /* Assegura que o tamanho da fonte seja o mesmo */
 }
 
 .nav-icon {
     width: auto;
-    height: 28px;
-    margin-right: 0;
+    height: 24px; /* Ajuste a altura do ícone */
+    margin-bottom: 5px; /* Espaçamento entre o ícone e o texto */
     vertical-align: middle;
 }
 
+/* ... (restante do CSS) ... */
 
-@media (max-width: 768px) {
-    .feature {
-        flex-basis: 48%;
-    }
-}
 
-@media (max-width: 480px) {
-    .feature {
-        flex-basis: 100%;
-    }
-}
+
+
 
 @keyframes pulse {
     0% {
