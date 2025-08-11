@@ -143,6 +143,7 @@ button.toggle-info:hover {
 }
 
 /* Footer */
+
 .nav-footer {
   position: fixed;
   bottom: 0;
@@ -151,9 +152,11 @@ button.toggle-info:hover {
   background-color: #e53935;
   display: flex;
   justify-content: space-around;
-  padding: 15px 0;
+  padding: 5px 0;
   z-index: 1000;
+  font-family: 'Libre Baskerville', serif;
 }
+
 
 .nav-footer a {
   color: white;
@@ -162,10 +165,12 @@ button.toggle-info:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Libre Baskerville', serif;
 }
 
 .nav-icon {
   width: auto;
-  height: 35px;
+  height: 28px;
+  margin-right: 0;
   vertical-align: middle;
 }

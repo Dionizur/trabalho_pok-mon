@@ -5,11 +5,19 @@
     font-family: 'Libre Baskerville', serif;
 }
 
+html, body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
 body {
     background-color: #f0f0f0;
     color: #333;
     line-height: 1.6;
-    padding-bottom: 40px;
     font-family: 'Libre Baskerville', serif;
 }
 
@@ -200,6 +208,7 @@ h2 {
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
 }
 
+
 .nav-footer {
     position: fixed;
     bottom: 0;
@@ -212,6 +221,7 @@ h2 {
     z-index: 1000;
     font-family: 'Libre Baskerville', serif;
 }
+
 
 .nav-footer a {
     color: white;
@@ -229,6 +239,7 @@ h2 {
     margin-right: 0;
     vertical-align: middle;
 }
+
 
 @media (max-width: 768px) {
     .feature {
