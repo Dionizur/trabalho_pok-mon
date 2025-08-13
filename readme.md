@@ -49,6 +49,6 @@ Essas funcionalidades foram desenvolvidas com o objetivo de proporcionar uma exp
 
 ## Acesso Online
 
-O site está disponível para acesso direto pelo navegador através do Netlify, no seguinte link: [https://pukimun.netlify.app/](https://pukimun.netlify.app/). 
+O site está disponível para acesso direto pelo navegador através do Netlify, no seguinte link: [https://pukimun.netlify.app/](https://pukimun.netlify.app/)
 
 Basta acessar o link para explorar todas as funcionalidades do projeto sem necessidade de instalação local.
