@@ -48,36 +48,6 @@ ul {
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
-.nav-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #e53935;
-    display: flex;
-    justify-content: space-around;
-    padding: 5px 0;
-    z-index: 1000;
-    font-family: 'Libre Baskerville', serif;
-}
-
-
-.nav-footer a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Libre Baskerville', serif;
-}
-
-.nav-icon {
-    width: auto;
-    height: 28px;
-    margin-right: 0;
-    vertical-align: middle;
-}
 
 
 header {
@@ -148,15 +118,6 @@ header .logo img {
 }
 
 
-.nav-footer {
-    flex-wrap: wrap; 
-}
-
-
-.nav-footer a {
-    flex: 1;
-    text-align: center; 
-}
 
 
 .red-button {

@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Pokémon</title>
-    <link rel="icon" type="image/x-icon"
-        href="https://www.pngplay.com/wp-content/uploads/2/Pokeball-PNG-Photo-Image.png">
-    <link rel="stylesheet" href="/pages/home/styles.css">
+    <link rel="icon" type="image/x-icon" href="https://www.pngplay.com/wp-content/uploads/2/Pokeball-PNG-Photo-Image.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Libre+Baskerville&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/pages/home/styles.css">
+    <link rel="stylesheet" href="/pages/home/navbar.css">
 </head>
-
 <body>
     <header>
         <div class="logo">
-            <img src="/pages/assets/pokeball.webp" alt="Pokémon Hub" class="logo-img" id="logo-img">
+            <img src="/assets/images/pokeball.webp" alt="Pokémon Hub" class="logo-img">
         </div>
     </header>
 
@@ -112,162 +109,18 @@
             Home
         </a>
         <a href="/pages/filmes/index.html">
-            <img src="/pages/assets/game.png" alt="Home" class="nav-icon">
+            <img src="/pages/assets/game.png" alt="Anime" class="nav-icon">
             Anime
         </a>
         <a href="/pages/Jogos/index.html">
-            <img src="/pages/assets/pokemon-go.png" alt="Home" class="nav-icon">
+            <img src="/pages/assets/pokemon-go.png" alt="Jogos" class="nav-icon">
             Jogos
         </a>
         <a href="/pages/Pokedex/index.html">
-            <img src="/pages/assets/pokemon-go2.png" alt="Home" class="nav-icon">
+            <img src="/pages/assets/pokemon-go2.png" alt="Pokédex" class="nav-icon">
             Pokédex
         </a>
     </nav>
-    <style>
-        header {
-            background-color: #e53935;
-            color: white;
-            padding: 5px 0;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            font-family: 'Libre Baskerville', serif;
-        }
-
-        .logo {
-            font-size: 2px;
-            font-weight: bold;
-            margin: 4px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            font-family: 'Libre Baskerville', serif;
-        }
-
-        .logo-img {
-            height: 1px;
-            width: auto;
-            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
-            animation: pulse 2s infinite;
-        }
-
-        header .logo img {
-            width: 90px;
-            height: auto;
-        }
-
-
-        .nav-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #e53935;
-            display: flex;
-            justify-content: space-around;
-            padding: 5px 0;
-            z-index: 1000;
-            font-family: 'Libre Baskerville', serif;
-        }
-
-
-        .nav-footer a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: 'Libre Baskerville', serif;
-        }
-
-        .nav-icon {
-            width: auto;
-            height: 28px;
-            margin-right: 0;
-            vertical-align: middle;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-    </style>
-    <script>
-        async function getRandomPokemon() {
-            try {
-                const randomId = Math.floor(Math.random() * 1010) + 1;
-
-                const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
-                const data = await response.json();
-
-                return data;
-            } catch (error) {
-                console.error("Erro ao buscar Pokémon:", error);
-                return null;
-            }
-        }
-
-        async function displayRandomPokemon() {
-            const pokemonDisplay = document.getElementById('pokemon-display');
-            pokemonDisplay.innerHTML = '<p>Carregando Pokémon...</p>';
-
-            const pokemon = await getRandomPokemon();
-
-            if (pokemon) {
-                const typeColors = {
-                    normal: '#A8A878',
-                    fire: '#F08030',
-                    water: '#6890F0',
-                    electric: '#F8D030',
-                    grass: '#78C850',
-                    ice: '#98D8D8',
-                    fighting: '#C03028',
-                    poison: '#A040A0',
-                    ground: '#E0C068',
-                    flying: '#A890F0',
-                    psychic: '#F85888',
-                    bug: '#A8B820',
-                    rock: '#B8A038',
-                    ghost: '#705898',
-                    dragon: '#7038F8',
-                    dark: '#705848',
-                    steel: '#B8B8D0',
-                    fairy: '#EE99AC'
-                };
-
-                const types = pokemon.types.map(typeInfo => typeInfo.type.name);
-
-                const typeBadges = types.map(type => `
-                    <span class="type-badge" style="background-color: ${typeColors[type] || '#777'}">
-                        ${type}
-                    </span>
-                `).join('');
-
-                pokemonDisplay.innerHTML = `
-                    <img class="pokemon-image" src="${pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default}" alt="${pokemon.name}">
-                    <p class="pokemon-name">${pokemon.name}</p>
-                    <div class="pokemon-types">
-                        ${typeBadges}
-                    </div>
-                    <p>Nº ${pokemon.id}</p>
-                `;
-            } else {
-                pokemonDisplay.innerHTML = '<p>Não foi possível carregar o Pokémon. Tente novamente!</p>';
-            }
-        }
-
-        document.getElementById('refresh-btn').addEventListener('click', displayRandomPokemon);
-
-        window.addEventListener('load', displayRandomPokemon);
-    </script>
+    <script src="script.js"></script>
 </body>
-
 </html>

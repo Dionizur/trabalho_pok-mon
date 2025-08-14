@@ -5,57 +5,55 @@
     font-family: 'Libre Baskerville', serif;
 }
 
-html, body {
-    height: 100vh;
-    width: 100vw;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    box-sizing: border-box;
-}
-
 body {
     background-color: #f0f0f0;
     color: #333;
-    padding: 0;
-    margin: 0;
+    padding-bottom: 70px;
+    min-height: 100vh;
 }
 
 header {
     background-color: #e53935;
     color: white;
-    padding: 20px;
+    padding: 15px 0;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.logo {
-    font-size: 1.2em; /* Ajuste para um tamanho de fonte legível */
-    font-weight: bold;
-    margin: 4px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
 }
 
 .logo-img {
-    height: 50px; /* Ajuste para um tamanho de imagem apropriado */
+    height: 50px;
     width: auto;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
     animation: pulse 2s infinite;
 }
 
-
-header .logo img {
-    width: 90px;
-    height: auto;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .random-pokemon {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
-    margin: 20px 0;
+    margin-bottom: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+}
+
+.sobre-app {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
 .pokemon-display {
@@ -209,55 +207,8 @@ h2 {
 }
 
 
-/* ... (restante do CSS) ... */
-
-.nav-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #e53935;
-    display: flex;
-    justify-content: space-around;
-    padding: 15px 0; /* Ajuste no padding para centralizar verticalmente */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ajuste na sombra */
-    z-index: 1000;
-    font-size: 14px; /* Tamanho de fonte reduzido */
-}
-
-.nav-footer a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 14px; /* Assegura que o tamanho da fonte seja o mesmo */
-}
-
-.nav-icon {
-    width: auto;
-    height: 24px; /* Ajuste a altura do ícone */
-    margin-bottom: 5px; /* Espaçamento entre o ícone e o texto */
-    vertical-align: middle;
-}
-
-/* ... (restante do CSS) ... */
-
-
-
-
-
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
