@@ -169,3 +169,12 @@ button.toggle-info:hover {
   height: 35px;
   vertical-align: middle;
 }
+/* Fonte padrão para títulos */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'DM Serif Display', serif;
+}
+
+/* Fonte para textos e parágrafos */
+body, p, a, button {
+  font-family: 'Libre Baskerville', serif;
+}

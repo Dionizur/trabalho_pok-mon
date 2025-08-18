@@ -1,43 +1,146 @@
 [
-    {
-      "title": "Pokémon Red & Blue",
-      "releaseDate": "27 de fevereiro de 1996",
-      "description": "Os primeiros jogos da franquia, lançados para o Game Boy, introduziram os 151 Pokémon originais e o conceito de captura, treinamento e batalhas.",
-      "additionalInfo": "Pokémon Red & Blue revolucionaram o mundo dos videogames, introduzindo a mecânica de trocas entre jogadores e batalhas em turnos. Esses jogos também introduziram as características de captura e o conceito de 'Pokédex', que é uma enciclopédia de Pokémon.",
-      "purchaseInfo": "Disponíveis em formato digital na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser adquiridas em lojas especializadas ou marketplaces como Mercado Livre e OLX.",
-      "imageUrl": "./assets/img/pokemonredblue.jpg"
-    },
-    {
-      "title": "Pokémon Gold & Silver",
-      "releaseDate": "21 de novembro de 1999",
-      "description": "Introduziram a região Johto e 100 novos Pokémon, além de recursos como ciclo de dia e noite, o que trouxe uma nova dinâmica ao jogo.",
-      "additionalInfo": "Gold & Silver são considerados por muitos os melhores jogos da série, com uma grande expansão da franquia. Eles trouxeram uma nova mecânica de jogabilidade com o 'Pokémon Shiny' e adicionaram o conceito de Pokémon míticos e lendários. Além disso, o jogo permitiu aos jogadores retornarem à região Kanto após completar Johto.",
-      "purchaseInfo": "Disponíveis em formato digital na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces como Mercado Livre e OLX.",
-      "imageUrl": "./assets/img/pokemongoldandsilver.jpg"
-    },
-    {
-      "title": "Pokémon Ruby & Sapphire",
-      "releaseDate": "21 de novembro de 2002",
-      "description": "Apresentaram a região Hoenn e batalhas duplas, com gráficos mais coloridos e novas mecânicas, como habilidades de Pokémon.",
-      "additionalInfo": "Esses jogos marcaram a transição para o Game Boy Advance, trazendo gráficos mais coloridos e um mundo mais dinâmico. Introduziram a mecânica de batalhas duplas, onde dois Pokémon lutam simultaneamente, e o sistema de habilidades, dando a cada Pokémon uma habilidade única. A região de Hoenn é repleta de diversidade, com climas tropicais e muitos eventos relacionados aos lendários Kyogre, Groudon e Rayquaza.",
-      "purchaseInfo": "Disponíveis em formato digital na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser adquiridas em lojas especializadas ou marketplaces como Mercado Livre e OLX.",
-      "imageUrl": "./assets/img/pokemonruby.jpg"
-    },
-    {
-      "title": "Pokémon Diamond & Pearl",
-      "releaseDate": "28 de setembro de 2006",
-      "description": "Levaram os jogadores à região Sinnoh e introduziram os gráficos 3D no Nintendo DS, além de novos tipos e movimentos de Pokémon.",
-      "additionalInfo": "Esses jogos trouxeram a quarta geração de Pokémon, com o suporte para gráficos 3D. A região Sinnoh foi rica em cultura e história, e o enredo girou em torno da organização Team Galactic e sua tentativa de manipular os Pokémon lendários Dialga e Palkia. Além disso, o Sistema de Troca Global (GTS) permitiu que jogadores de diferentes partes do mundo trocassem Pokémon online.",
-      "purchaseInfo": "Disponíveis em formato digital na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces como Mercado Livre e OLX.",
-      "imageUrl": "./assets/img/pokemondimond.jpg"
-    },
-    {
-      "title": "Pokémon Legends: Arceus",
-      "releaseDate": "28 de janeiro de 2022",
-      "description": "RPG de ação com mundo aberto, ambientado na região Hisui, prequela de Diamond e Pearl, oferecendo uma nova experiência de captura e exploração de Pokémon.",
-      "additionalInfo": "Pokémon Legends: Arceus foi um dos maiores saltos para a franquia, com uma mecânica de mundo aberto, onde os jogadores podem capturar Pokémon diretamente no ambiente sem batalhas prévias. O jogo se passa no passado da região Sinnoh, e foca na criação do primeiro Pokédex da região, com uma história centrada no Pokémon lendário Arceus. A inovação principal foi a mudança de foco, dando aos jogadores maior liberdade para explorar e interagir com o mundo.",
-      "purchaseInfo": "Disponível em formato digital na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser adquiridas em lojas especializadas ou marketplaces como Mercado Livre e OLX.",
-      "imageUrl": "./assets/img/pokemonarceus.jpg"
-    }
-  ]
-  
+  {
+    "title": "Pokémon Red & Blue",
+    "releaseDate": "27 de fevereiro de 1996",
+    "description": "Os primeiros jogos da franquia, lançados para o Game Boy, introduziram os 151 Pokémon originais e o conceito de captura, treinamento e batalhas.",
+    "additionalInfo": "Pokémon Red & Blue revolucionaram o mundo dos videogames, introduzindo a mecânica de trocas entre jogadores e batalhas em turnos. Esses jogos também introduziram as características de captura e o conceito de 'Pokédex'.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser adquiridas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonredblue.jpg"
+  },
+  {
+    "title": "Pokémon Yellow",
+    "releaseDate": "12 de setembro de 1998",
+    "description": "Versão aprimorada de Red e Blue, inspirada no anime e com Pikachu como Pokémon inicial que segue o jogador.",
+    "additionalInfo": "Inclui eventos e diálogos mais próximos do desenho animado, batalhas contra os vilões da Equipe Rocket Jessie e James, e melhorias gráficas.",
+    "purchaseInfo": "Disponível na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonyellow.jpg"
+  },
+  {
+    "title": "Pokémon Gold & Silver",
+    "releaseDate": "21 de novembro de 1999",
+    "description": "Introduziram a região Johto e 100 novos Pokémon, além de ciclo de dia e noite e retorno à região Kanto.",
+    "additionalInfo": "Incluiu criação de Pokémon, Pokémon shiny, e uma das maiores áreas exploráveis da série.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemongoldandsilver.jpg"
+  },
+  {
+    "title": "Pokémon HeartGold & SoulSilver",
+    "releaseDate": "12 de setembro de 2009",
+    "description": "Remakes de Gold e Silver para Nintendo DS, com gráficos melhorados e novos recursos.",
+    "additionalInfo": "Incluem o Pokéwalker, minigames e eventos extras, além de manter a exploração dupla de Johto e Kanto.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonheartgoldsoulsilver.jpg"
+  },
+  {
+    "title": "Pokémon Ruby & Sapphire",
+    "releaseDate": "21 de novembro de 2002",
+    "description": "Apresentaram a região Hoenn, batalhas duplas e habilidades de Pokémon.",
+    "additionalInfo": "Transição para o Game Boy Advance, gráficos mais coloridos e lendários Kyogre, Groudon e Rayquaza.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser adquiridas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonruby.jpg"
+  },
+  {
+    "title": "Pokémon Emerald",
+    "releaseDate": "16 de setembro de 2004",
+    "description": "Versão expandida de Ruby e Sapphire com novos desafios e Battle Frontier.",
+    "additionalInfo": "Inclui a participação conjunta dos lendários Kyogre e Groudon na história e modo de batalha avançado.",
+    "purchaseInfo": "Disponível na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser adquiridas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonemerald.jpg"
+  },
+  {
+    "title": "Pokémon Diamond & Pearl",
+    "releaseDate": "28 de setembro de 2006",
+    "description": "Introduziram a região Sinnoh, conexão online e GTS para trocas globais.",
+    "additionalInfo": "Primeiros jogos principais no Nintendo DS com suporte a gráficos 3D e lendários Dialga e Palkia.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemondiamondpearl.jpg"
+  },
+  {
+    "title": "Pokémon Platinum",
+    "releaseDate": "13 de setembro de 2008",
+    "description": "Versão definitiva de Diamond e Pearl com história e conteúdos adicionais.",
+    "additionalInfo": "Inclui o Distortion World e o lendário Giratina como foco principal.",
+    "purchaseInfo": "Disponível na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonplatinum.jpg"
+  },
+  {
+    "title": "Pokémon Black & White",
+    "releaseDate": "18 de setembro de 2010",
+    "description": "Apresentaram a região Unova, trama mais madura e 156 novos Pokémon.",
+    "additionalInfo": "Primeira geração a não incluir Pokémon antigos até o pós-game e foco narrativo mais intenso.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonblackwhite.jpg"
+  },
+  {
+    "title": "Pokémon Black 2 & White 2",
+    "releaseDate": "23 de junho de 2012",
+    "description": "Sequência direta de Black & White, com novos locais, personagens e história expandida.",
+    "additionalInfo": "Inclui Pokéstar Studios, Pokémon World Tournament e integração com Dream World.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonblack2white2.jpg"
+  },
+  {
+    "title": "Pokémon X & Y",
+    "releaseDate": "12 de outubro de 2013",
+    "description": "Primeiros jogos em 3D na série principal, apresentando Kalos e Mega Evoluções.",
+    "additionalInfo": "Incluem customização de personagens e introdução do tipo Fada.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonxy.jpg"
+  },
+  {
+    "title": "Pokémon Omega Ruby & Alpha Sapphire",
+    "releaseDate": "21 de novembro de 2014",
+    "description": "Remakes de Ruby e Sapphire com gráficos 3D e conteúdo expandido.",
+    "additionalInfo": "Incluem o Delta Episode e Mega Evoluções inéditas.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonomegarubyalphasapphire.jpg"
+  },
+  {
+    "title": "Pokémon Sun & Moon",
+    "releaseDate": "18 de novembro de 2016",
+    "description": "Introduziram a região tropical de Alola, mudanças nas academias e Alola Forms.",
+    "additionalInfo": "Removem ginásios tradicionais e focam em provas e desafios insulares.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonsunmoon.jpg"
+  },
+  {
+    "title": "Pokémon Ultra Sun & Ultra Moon",
+    "releaseDate": "17 de novembro de 2017",
+    "description": "Versões expandidas de Sun & Moon com história alternativa e novos Pokémon.",
+    "additionalInfo": "Incluem Ultra Wormholes e novos lendários capturáveis.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonultrasunultramoon.jpg"
+  },
+  {
+    "title": "Pokémon Sword & Shield",
+    "releaseDate": "15 de novembro de 2019",
+    "description": "Primeiros jogos principais para Nintendo Switch, introduziram Wild Area e Dynamax.",
+    "additionalInfo": "Região de Galar inspirada no Reino Unido, com DLCs Isle of Armor e Crown Tundra.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para Nintendo Switch. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonswordshield.jpg"
+  },
+  {
+    "title": "Pokémon Legends: Arceus",
+    "releaseDate": "28 de janeiro de 2022",
+    "description": "RPG de ação com mundo aberto ambientado no passado da região Sinnoh.",
+    "additionalInfo": "Foco em captura livre, exploração e criação do primeiro Pokédex da região.",
+    "purchaseInfo": "Disponível na Nintendo eShop para Nintendo Switch. Cópias físicas podem ser adquiridas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonarceus.jpg"
+  },
+  {
+    "title": "Pokémon Scarlet & Violet",
+    "releaseDate": "18 de novembro de 2022",
+    "description": "Primeiros jogos de mundo aberto completo na franquia, com a região de Paldea.",
+    "additionalInfo": "Introduziram a mecânica Terastal e liberdade total de exploração.",
+    "purchaseInfo": "Disponíveis na Nintendo eShop para Nintendo Switch. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
+    "imageUrl": "./assets/img/pokemonscarletviolet.jpg"
+  },
+  {
+    "title": "Pokémon Legends: Z-A",
+    "releaseDate": "Previsto para 2025",
+    "description": "Sequência de Legends: Arceus, ambientada em Lumiose City com combate em tempo real.",
+    "additionalInfo": "Ainda em desenvolvimento, promete expandir a fórmula de mundo aberto.",
+    "purchaseInfo": "Disponível em pré-venda na Nintendo eShop e revendedores autorizados.",
+    "imageUrl": "./assets/img/pokemonlegendsza.jpg"
+  }
+]
