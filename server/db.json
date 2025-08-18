@@ -1,4 +1,4 @@
-[
+{"games":[
   {
     "title": "Pokémon Red & Blue",
     "releaseDate": "27 de fevereiro de 1996",
@@ -13,7 +13,7 @@
     "description": "Versão aprimorada de Red e Blue, inspirada no anime e com Pikachu como Pokémon inicial que segue o jogador.",
     "additionalInfo": "Inclui eventos e diálogos mais próximos do desenho animado, batalhas contra os vilões da Equipe Rocket Jessie e James, e melhorias gráficas.",
     "purchaseInfo": "Disponível na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
-    "imageUrl": "./assets/img/pokemonyellow.jpg"
+    "imageUrl": "./assets/img/pokemonyellow.png"
   },
   {
     "title": "Pokémon Gold & Silver",
@@ -29,7 +29,7 @@
     "description": "Remakes de Gold e Silver para Nintendo DS, com gráficos melhorados e novos recursos.",
     "additionalInfo": "Incluem o Pokéwalker, minigames e eventos extras, além de manter a exploração dupla de Johto e Kanto.",
     "purchaseInfo": "Disponíveis na Nintendo eShop para consoles compatíveis. Cópias físicas podem ser encontradas em lojas especializadas ou marketplaces.",
-    "imageUrl": "./assets/img/pokemonheartgoldsoulsilver.jpg"
+    "imageUrl": "./assets/img/pokemonheartgoldsoulsilver.png"
   },
   {
     "title": "Pokémon Ruby & Sapphire",
@@ -144,3 +144,4 @@
     "imageUrl": "./assets/img/pokemonlegendsza.jpg"
   }
 ]
+}
