@@ -8,46 +8,52 @@
 body {
     background-color: #f0f0f0;
     color: #333;
-    line-height: 1.6;
-    padding-bottom: 40px;
-    font-family: 'Libre Baskerville', serif;
+    padding-bottom: 70px;
+    min-height: 100vh;
 }
 
 header {
     background-color: #e53935;
     color: white;
-    padding: 5px 0;
+    padding: 15px 0;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 20px;
 }
 
-.logo {
-    font-size: 2px;
-    font-weight: bold;
-    margin: 4px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    font-family: 'Libre Baskerville', serif;
-}
 .logo-img {
-    height: 1px;
+    height: 50px;
     width: auto;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
     animation: pulse 2s infinite;
 }
 
-header .logo img {
-  width: 90px; 
-  height: auto; 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .random-pokemon {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
-    margin: 20px 0;
+    margin-bottom: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+}
+
+.sobre-app {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
 .pokemon-display {
@@ -103,7 +109,7 @@ header .logo img {
 
 .container {
     max-width: 1200px;
-    margin: 30px auto;
+
     padding: 0 20px;
     font-family: 'Libre Baskerville', serif;
 }
@@ -200,47 +206,6 @@ h2 {
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
 }
 
-.nav-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #e53935;
-    display: flex;
-    justify-content: space-around;
-    padding: 5px 0;
-    z-index: 1000;
-    font-family: 'Libre Baskerville', serif;
-}
-
-.nav-footer a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Libre Baskerville', serif;
-}
-
-.nav-icon {
-    width: auto;
-    height: 28px;
-    margin-right: 0;
-    vertical-align: middle;
-}
-
-@media (max-width: 768px) {
-    .feature {
-        flex-basis: 48%;
-    }
-}
-
-@media (max-width: 480px) {
-    .feature {
-        flex-basis: 100%;
-    }
-}
 
 @keyframes pulse {
     0% { transform: scale(1); }
